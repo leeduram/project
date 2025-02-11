@@ -1,0 +1,213 @@
+.loginHeader{
+	width: 100%;
+	height: 100px;
+	background-color: #050B17;
+	display: flex;
+	justify-content: space-between;
+}
+.site{
+	width: 117px;
+	height: 50px;
+	display: flex;
+	margin-top: 25px;
+	margin-left: 32px;
+}
+.site img{
+	width: 50px;
+	height: 50px;
+}
+.site p{
+	color: white;
+	font-size: 30px;
+	font-weight: 700;
+	margin-top: 7px;
+}
+.category{
+	width: 476px;
+	height: 36px;
+	display: flex;
+	justify-content: space-between;
+	margin-top: 32px;
+}
+.categoryBtn{
+	color: white;
+	font-size: 30px;
+	text-decoration: none;
+}
+.imgbtn{
+	width: 48px;
+	height: 48px;
+	margin-top: 26px;
+	margin-right: 32px;
+	cursor: pointer;
+}
+
+main{
+	min-height: calc(100vh - 160px);
+	background-color: #050B17;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.container{
+    width: 1400px;
+    height: 800px;
+    background-color: white;
+    margin-top: 60px;
+    margin-bottom: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.h1{
+    font-size: 50px;
+    font-weight: 700;
+    margin-top: 60px;
+}
+.h2{
+    width: 308px;
+    height: 36px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+.h2 p{
+    font-size: 30px;
+}
+.subcon{
+    width: 1200px;
+    height: 440px;
+    display: flex;
+    flex-direction: column;
+}
+.box, .box1{
+    width: 1200px;
+    height: 40px;
+    border-bottom: 1px solid black;
+    display: flex;
+    box-sizing: border-box;
+}
+.box > :nth-child(1), .box1 > :nth-child(1){
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    text-align: center;
+    line-height: 40px;
+}
+.box div{
+    font-weight: 700;
+}
+.box > :nth-child(2){
+    width: 870px;
+    height: 40px;
+    font-size: 20px;
+    text-align: center;
+    line-height: 40px;
+}
+.box1 > :nth-child(2){
+    width: 870px;
+    height: 40px;
+    font-size: 20px;
+    line-height: 40px;
+    padding-left: 16px;
+    box-sizing: border-box;
+}
+.box > :nth-child(3), .box1 > :nth-child(3){
+    width: 80px;
+    height: 40px;
+    font-size: 20px;
+    text-align: center;
+    line-height: 40px;
+}
+.box > :nth-child(4), .box1 > :nth-child(4){
+    width: 210px;
+    height: 40px;
+    font-size: 20px;
+    text-align: center;
+    line-height: 40px;
+}
+.btnmove{
+	width: 1200px;
+	display: flex;
+	justify-content: flex-end;
+}
+.btn{
+    width: 770px;
+    height: 24px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+}
+.search{
+	width: 340px;
+	height: 24px;
+	display: flex;
+}
+select{
+	width: 60px;
+	height: 24px;
+	font-size: 12px;
+	border-radius: 0px;
+	outline: none;
+}
+.input{
+	width: 280px;
+	height: 24px;
+	border: 1px solid black;
+	box-sizing: border-box;
+	outline: none;
+	display: flex;
+}
+.input input{
+	width: 248px;
+	height: 20px;
+	border: 0px;
+	outline: none;
+}
+.searchbtn{
+	width: 20px;
+	height: 22px;
+	border: 0px ;
+	background-color: white;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.searchbtn img{
+	width: 20px;
+	height: 20px;
+}
+.writebtn{
+    width: 65px;
+    height: 20px;
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+.page{
+    display: flex;
+    gap: 6px;
+    margin-top: 29px;
+}
+.page div{
+    width: 30px;
+    height: 30px;
+    border: 1px solid black;
+    box-sizing: border-box;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 30px;
+}
+
+footer{
+	width: 100%;
+	height: 60px;
+	background-color: #050B17;
+	color: white;
+	font-size: 15px;
+	text-align: center;
+	line-height: 60px;
+}
