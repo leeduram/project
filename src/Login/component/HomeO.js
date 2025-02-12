@@ -35,9 +35,9 @@ const HomeO = () => {
 					<p>bZip</p>
 				</div>
 				<div className={styles.category}>
-					<Link to='/home' className={styles.categoryBtn}>Home</Link>
-					<Link to='/upload' className={styles.categoryBtn}>Upload</Link>
-					<Link to='/community1' className={styles.categoryBtn}>Community</Link>
+					<Link to='/homeo' className={styles.categoryBtn}>Home</Link>
+					<Link to='/fix' className={styles.categoryBtn}>Upload</Link>
+					<Link to='/board' className={styles.categoryBtn}>Community</Link>
 				</div>
 				<img src={user} alt="profile" className={styles.imgbtn} onClick={handleClick}></img>
 			</header>

@@ -5,7 +5,7 @@ import Signup from './Logout/component/SignUp';
 import Signin from './Logout/component/SigIn';
 import HomeO from './Login/component/HomeO';
 import HomeX from './Logout/component/HomeX';
-import AA from './Login/component/AA'
+import Board from './Login/component/Board'
 
 function App() {
 	
@@ -17,7 +17,7 @@ function App() {
 			<Route path='/signin' element={<Signin/>}></Route>
 			<Route path='/homeo' element={<HomeO/>}></Route>
 			<Route path='/homex' element={<HomeX/>}></Route>
-			<Route path='/aa' element={<AA/>}/>
+			<Route path='/board' element={<Board/>}/>
 		</Routes>
 	</>
 	)

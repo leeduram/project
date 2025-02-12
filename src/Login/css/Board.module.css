@@ -29,7 +29,11 @@
 	justify-content: space-between;
 	margin-top: 32px;
 }
-
+.categoryBtn{
+	color: white;
+	font-size: 30px;
+	text-decoration: none;
+}
 .imgbtn{
 	width: 48px;
 	height: 48px;
@@ -44,6 +48,57 @@ main{
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+}
+.profileBox{
+	width: 480px;
+	height: 600px;
+	background-color: rgba(255, 255, 255, 0.4);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	position: fixed;
+	z-index: 10000px;
+}
+.profileImg{
+	width: 160px;
+	height: 160px;
+	margin-top: 32px;
+}
+.profileBox > p:nth-of-type(1){
+	color: white;
+	font-size: 32px;
+	margin-top: 60px;
+}
+.profileBox > p:nth-of-type(2){
+	color: white;
+	font-size: 28px;
+	margin-top: 12px;
+}
+.mypage{
+	width: 240px;
+	height: 48px;
+	background-color: white;
+	border-radius: 16px;
+	font-size: 24px;
+	text-align: center;
+	line-height: 48px;
+	margin-top: 60px;
+}
+.logout{
+	width: 240px;
+	height: 48px;
+	background-color: #1F3A5F;
+	border-radius: 16px;
+	color: white;
+	font-size: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 12px;
+}
+.logout img{
+	width: 32px;
+	height: 32px;
 }
 .container{
     width: 1400px;
@@ -71,7 +126,7 @@ main{
 .h2 p{
     font-size: 30px;
 }
-.subcon{
+.subcontainer{
     width: 1200px;
     height: 440px;
     display: flex;
@@ -84,24 +139,27 @@ main{
     display: flex;
     box-sizing: border-box;
 }
-.box > :nth-child(1), .box1 > :nth-child(1){
+.box div{
+	font-weight: 700;
+}
+.box1:hover{
+	background-color: rgba(0, 0, 0, 0.041);
+}
+.num{
     width: 40px;
     height: 40px;
     font-size: 20px;
     text-align: center;
     line-height: 40px;
 }
-.box div{
-    font-weight: 700;
-}
-.box > :nth-child(2){
+.title{
     width: 870px;
     height: 40px;
     font-size: 20px;
     text-align: center;
     line-height: 40px;
 }
-.box1 > :nth-child(2){
+.dataTitle{
     width: 870px;
     height: 40px;
     font-size: 20px;
@@ -109,49 +167,103 @@ main{
     padding-left: 16px;
     box-sizing: border-box;
 }
-.box > :nth-child(3), .box1 > :nth-child(3){
+.writer{
     width: 80px;
     height: 40px;
     font-size: 20px;
     text-align: center;
     line-height: 40px;
 }
-.box > :nth-child(4), .box1 > :nth-child(4){
+.date{
     width: 210px;
     height: 40px;
     font-size: 20px;
     text-align: center;
     line-height: 40px;
 }
-.btn{
-    width: 1200px;
-    height: 20px;
+.searchTool{
+	width: 1200px;
+	display: flex;
+	justify-content: flex-end;
+}
+.tool{
+    width: 770px;
+    height: 24px;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     margin-top: 16px;
 }
-.btn div{
+.search{
+	width: 340px;
+	height: 24px;
+	display: flex;
+}
+select{
+	width: 60px;
+	height: 24px;
+	font-size: 12px;
+	border-radius: 0px;
+	outline: none;
+}
+.input{
+	width: 280px;
+	height: 24px;
+	border: 1px solid black;
+	box-sizing: border-box;
+	outline: none;
+	display: flex;
+}
+.input input{
+	width: 248px;
+	height: 20px;
+	border: 0px;
+	outline: none;
+}
+.searchbtn{
+	width: 20px;
+	height: 22px;
+	border: 0px ;
+	background-color: white;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.searchbtn img{
+	width: 20px;
+	height: 20px;
+}
+.writebtn{
     width: 65px;
     height: 20px;
     background-color: black;
     color: white;
     text-align: center;
-    line-height: 20px;
 }
 .page{
     display: flex;
     gap: 6px;
-    margin-top: 29px;
+    margin-top: 61px;
 }
-.page div{
+.moveBtn{
     width: 30px;
     height: 30px;
+	background-color: white;
     border: 1px solid black;
     box-sizing: border-box;
     font-size: 20px;
     font-weight: 700;
     text-align: center;
     line-height: 30px;
+	cursor: pointer;
+}
+.active{
+	background-color: #006FFF;
+	color: white;
+	font-weight: 700;
+}
+.moveBtn:disabled{
+	cursor: default;
 }
 
 footer{
