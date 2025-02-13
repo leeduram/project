@@ -1,4 +1,4 @@
-.unloginHeader{
+.only-logo{
 	width: 100%;
 	height: 100px;
 	background-color: #050B17;
@@ -6,11 +6,11 @@
 	align-items: center;
 	justify-content: center;
 }
-.unloginHeader img{
+.only-logo img{
 	width: 80px;
 	height: 80px;
 }
-.unloginHeader p{
+.only-logo p{
 	color: white;
 	font-size: 60px;
 	font-weight: 700;
@@ -23,12 +23,12 @@ main{
 	flex-direction: column;
 	align-items: center;
 }
-.container{
+.signup-main .container{
 	display: flex;
 	padding-top: 60px;
 	padding-bottom: 60px;
 }
-.signup{
+.container > div:nth-child(1){
 	width: 736px;
 	height: 800px;
 	background-color: white;
@@ -36,7 +36,7 @@ main{
 	flex-direction: column;
 	align-items: center;
 }
-.signup h1{
+.signup-main h1{
 	font-size: 60px;
 	font-weight: 700;
 	color: black;
@@ -68,7 +68,7 @@ main{
 .btn{
 	margin-top: 32px;
 }
-.signupBtn{
+.signup-main button{
 	display: block;
 	width: 460px;
 	height: 80px;
@@ -90,12 +90,12 @@ main{
 	margin-left: 202px;
 	margin-top: 35px;
 }
-.textBtn > :nth-child(1){
+.textBtn p{
 	color: #6c6c6c;
 	font-size: 15px;
 	margin-top: 3px;
 }
-.textBtn > :nth-child(2){
+.textBtn a{
 	color: #0085FF;
 	font-size: 20px;
 	font-weight: 700;
@@ -104,14 +104,4 @@ main{
 .container img{
 	width: 736px;
 	height: 800px;
-}
-
-footer{
-	width: 100%;
-	height: 60px;
-	background-color: #050B17;
-	color: white;
-	font-size: 15px;
-	text-align: center;
-	line-height: 60px;
 }

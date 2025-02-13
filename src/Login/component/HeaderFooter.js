@@ -4,49 +4,48 @@ import b from '../img/b.png';
 import user from '../img/user.png';
 import out from '../img/logout.png'
 import '../css/-reset.css'
-import styles from '../css/.module.css'
+import '../css/HeaderFooter.css'
 import axios from "axios";
 
-const  = () => {
+const HeaderFooter = () => {
 	const [profileOpen,setProfileOpen] = useState(false);
-	const handleClick=() => {
-		setProfileOpen(!profileOpen)
-	}
 	const [loginData,setLoginData] = useState({
 		nickname:'',
 		signupDate:''
 	})
-	const userData = () => {
+
+	useEffect(() =>{
 		axios.get('http://localhost:8080/api/info', { withCredentials: true })
 		.then((resp) => {
 			setLoginData(resp.data)
 		})
-	}
-	useEffect(() =>{
-		userData()
 	},[])
 
+	const handleClick=() => {
+		setProfileOpen(!profileOpen)
+	}
+	
 	return(
 		<>
-			<header className={styles.loginHeader}>
-				<div className={styles.site}>
+			<header className="login-header">
+				<div className="logo">
 					<img src={b} alt="logo"></img>
 					<p>bZip</p>
 				</div>
-				<div className={styles.category}>
-					<Link to='/homeo' className={styles.categoryBtn}>Home</Link>
-					<Link to='/fix' className={styles.categoryBtn}>Upload</Link>
-					<Link to='/board' className={styles.categoryBtn}>Community</Link>
+				<div className="category">
+					<Link to='/home'>Home</Link>
+					<Link to='/fix'>Upload</Link>
+					<Link to='/board'>Community</Link>
 				</div>
-				<img src={user} alt="profile" className={styles.imgbtn} onClick={handleClick}></img>
+				<img src={user} alt="profile" onClick={handleClick}></img>
 			</header>
 			<main>
-				{profileOpen && <div className={styles.profileBox}>
-					<img src={user} className={styles.profileImg}/>
+				{profileOpen && <div className="profile-box">
+					<img src={user}/>
 					<p>{loginData.nickname}</p>
 					<p>Member Since : {loginData.signupDate}</p>
-					<div className={styles.mypage}>My Page</div>
-					<div className={styles.logout}>
+					<div className="my-page">My Page</div>
+					<div className="logout">
 						<img src={out}></img>
 						<p>Log Out</p>
 					</div>
@@ -57,4 +56,4 @@ const  = () => {
 	)
 }
 
-export default ;
+export default HeaderFooter;

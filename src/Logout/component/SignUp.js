@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import b from '../img/b.png'
 import developer from '../img/developer.png'
 import '../css/-reset.css'
-import styles from '../css/SignUp.module.css'
+import '../css/SignUp.css'
 import axios from "axios"
 
 const Signup = () => {
@@ -17,12 +17,23 @@ const Signup = () => {
 		auth: '',
 		accountStatus: ''
 	}])
-	useEffect(() => {
-		axios.get('http://localhost:8080/api/allData')
-		.then((resp) => {
-			setData(resp.data)
-		})
-	},[])
+	const [email,setEmail] = useState('')
+	const [emailError,setEmailError] = useState('')
+	const [duplicatedEmail,setDuplicatedEmail] = useState('')
+	const [pw,setPw] = useState('')
+	const [pwError,setPwError] = useState('')
+	const [repw,setRepw] = useState('')
+	const [repwError,setRepwError] = useState('')
+	const [name,setName] = useState('')
+	const [nameError,setNameError] = useState('')
+	const [nickname,setNickname] = useState('')
+	const [nicknameError,setNicknameError] = useState('')
+	const [duplicatedNickname,setDuplicatedNickname] = useState('')
+	const btnActivation = email && !emailError && !duplicatedEmail 
+	&& pw && !pwError 
+	&& repw && !repwError 
+	&& name && !nameError 
+	&& nickname && !nicknameError && !duplicatedNickname
 	const emailList = data.map((data) => {
 		return data.email
 	})
@@ -35,10 +46,25 @@ const Signup = () => {
 	const lowerNicknameList = nicknameList.map((data) => {
 		return data.toLowerCase();
 	})
-
-	const [email,setEmail] = useState('')
-	const [emailError,setEmailError] = useState('')
-	const [duplicatedEmail,setDuplicatedEmail] = useState('')
+	
+	useEffect(() => {
+		axios.get('http://localhost:8080/api/allData')
+		.then((resp) => {
+			setData(resp.data)
+		})
+	},[])
+	useEffect(() => {
+		if(repw === ''){
+			setRepwError('')
+		}else{
+			if(repw === pw){
+				setRepwError('')
+			}else{
+				setRepwError('비밀번호가 일치하지 않습니다.')
+			}
+		}
+	},[repw, pw])
+	
 	const handleChangeEmail = (e) => {
 		const value = e.target.value;
 		const lowerValue = value.toLowerCase();
@@ -63,9 +89,6 @@ const Signup = () => {
 			}
 		}
 	}
-
-	const [pw,setPw] = useState('')
-	const [pwError,setPwError] = useState('')
 	const handleChangePw = (e) => {
 		const value = e.target.value;
 		setPw(value);
@@ -80,27 +103,10 @@ const Signup = () => {
 			}
 		}
 	}
-
-	const [repw,setRepw] = useState('')
-	const [repwError,setRepwError] = useState('')
 	const handleChangeRepw = (e) => {
 		const value = e.target.value;
 		setRepw(value);
 	}
-	useEffect(() => {
-		if(repw === ''){
-			setRepwError('')
-		}else{
-			if(repw === pw){
-				setRepwError('')
-			}else{
-				setRepwError('비밀번호가 일치하지 않습니다.')
-			}
-		}
-	},[repw, pw])
-
-	const [name,setName] = useState('')
-	const [nameError,setNameError] = useState('')
 	const handleChangeName = (e) => {
 		const value = e.target.value;
 		setName(value);
@@ -115,10 +121,6 @@ const Signup = () => {
 			}
 		}
 	}
-
-	const [nickname,setNickname] = useState('')
-	const [nicknameError,setNicknameError] = useState('')
-	const [duplicatedNickname,setDuplicatedNickname] = useState('')
 	const handleChangeNickname = (e) => {
 		const value = e.target.value;
 		const lowerValue = value.toLowerCase();
@@ -142,7 +144,6 @@ const Signup = () => {
 			}
 		}
 	}
-
 	const handleClick = (e) => {
 		e.preventDefault();
 		axios.post('http://localhost:8080/api/signup',{
@@ -157,62 +158,57 @@ const Signup = () => {
 			alert('error: '+err)
 		})
 	}
-	const btnActivation = email && !emailError && !duplicatedEmail 
-	&& pw && !pwError 
-	&& repw && !repwError 
-	&& name && !nameError 
-	&& nickname && !nicknameError && !duplicatedNickname
 
 	return(
 		<>
-			<header className={styles.unloginHeader}>
+			<header className="only-logo">
 				<img src={b} alt="logo"></img>
 				<p>bZip</p>
 			</header>
-			<main>
-				<div className={styles.container}>
-					<div className={styles.signup}>
+			<main className="signup-main">
+				<div className="container">
+					<div>
 						<h1>Create Account</h1>
-						<div className={styles.id}>
-							<p className={styles.label}>E-mail ID</p>
+						<div className="id">
+							<p className="label">E-mail ID</p>
 							<input type="email" name="email" onChange={handleChangeEmail}
 							style={{outline:duplicatedEmail? '1px solid red':'none'}}/>
-							{emailError && <p className={styles.error}>{emailError}</p>}
-							{duplicatedEmail && <p className={styles.error}>{duplicatedEmail}</p>}
+							{emailError && <p className="error">{emailError}</p>}
+							{duplicatedEmail && <p className="error">{duplicatedEmail}</p>}
 						</div>
-						<div className={styles.pw}>
-							<p className={styles.label}>Password</p>
+						<div className="pw">
+							<p className="label">Password</p>
 							<input type="password" name="password" onChange={handleChangePw}/>
-							{pwError && <p className={styles.error}>{pwError}</p>}
+							{pwError && <p className="error">{pwError}</p>}
 						</div>
-						<div className={styles.repw}>
-							<p className={styles.label}>Re-Password</p>
+						<div className="repw">
+							<p className="label">Re-Password</p>
 							<input type="password" name="repw" onChange={handleChangeRepw}
 							style={{outline:repwError? '1px solid red':'none'}}/>
-							{repwError && <p className={styles.error}>{repwError}</p>}
+							{repwError && <p className="error">{repwError}</p>}
 						</div>
-						<div className={styles.name}>
-							<p className={styles.label}>Name</p>
+						<div className="name">
+							<p className="label">Name</p>
 							<input type="text" name="name" onChange={handleChangeName}/>
-							{nameError && <p className={styles.error}>{nameError}</p>}
+							{nameError && <p className="error">{nameError}</p>}
 						</div>
-						<div className={styles.nickname}>
-							<p className={styles.label}>Nickname</p>
+						<div className="nickname">
+							<p className="label">Nickname</p>
 							<input type="text" name="nickname" onChange={handleChangeNickname}
 							style={{outline:duplicatedNickname? '1px solid red':'none'}}/>
-							{nicknameError && <p className={styles.error}>{nicknameError}</p>}
-							{duplicatedNickname && <p className={styles.error}>{duplicatedNickname}</p>}
+							{nicknameError && <p className="error">{nicknameError}</p>}
+							{duplicatedNickname && <p className="error">{duplicatedNickname}</p>}
 						</div>
-						<div className={styles.btn}>
-							<button className={styles.signupBtn} onClick={handleClick}
+						<div className="btn">
+							<button onClick={handleClick}
 							disabled={!btnActivation}>Sign Up</button>
-							<div className={styles.textBtn}>
+							<div className="textBtn">
 								<p>Already have an account?</p>
 								<Link to='/signin'>Sign In</Link>
 							</div>
 						</div>
 					</div>
-						<img src={developer} alt="developer"></img>
+					<img src={developer} alt="developer"></img>
 				</div>
 			</main>
 			<footer>Copyright © 2025 bZip</footer>

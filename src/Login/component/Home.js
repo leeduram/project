@@ -13,28 +13,15 @@ import rog1 from '../img/rog1.png'
 import rog2 from '../img/rog2.png'
 import rog3 from '../img/rog3.png'
 import '../css/-reset.css'
-import styles from '../css/HomeO.module.css'
+import '../css/Home.css'
 import axios from "axios";
 
-const HomeO = () => {
+const Home = () => {
 	const [profileOpen,setProfileOpen] = useState(false);
-	const handleClick=() => {
-		setProfileOpen(!profileOpen)
-	}
 	const [loginData,setLoginData] = useState({
 		nickname:'',
 		signupDate:''
 	})
-	const userData = () => {
-		axios.get('http://localhost:8080/api/info', { withCredentials: true })
-		.then((resp) => {
-			setLoginData(resp.data)
-		})
-	}
-	useEffect(() =>{
-		userData()
-	},[])
-
 	const navi = useNavigate();
 	const portal1 = () => {
 		navi('/gamepost1')
@@ -43,37 +30,49 @@ const HomeO = () => {
 		navi('/gamepost2')
 	}
 
+	useEffect(() =>{
+		axios.get('http://localhost:8080/api/info', { withCredentials: true })
+		.then((resp) => {
+			setLoginData(resp.data)
+		})
+	},[])
+
+	const handleClick=() => {
+		setProfileOpen(!profileOpen)
+	}
+
+
 	return(
 		<>
-			<header className={styles.loginHeader}>
-				<div className={styles.site}>
+			<header className="login-header">
+				<div className="logo">
 					<img src={b} alt="logo"></img>
 					<p>bZip</p>
 				</div>
-				<div className={styles.category}>
-					<Link to='/homeo' className={styles.categoryBtn}>Home</Link>
-					<Link to='/fix' className={styles.categoryBtn}>Upload</Link>
-					<Link to='/board' className={styles.categoryBtn}>Community</Link>
+				<div className="category">
+					<Link to='/home'>Home</Link>
+					<Link to='/fix'>Upload</Link>
+					<Link to='/board'>Community</Link>
 				</div>
-				<img src={user} alt="profile" className={styles.imgbtn} onClick={handleClick}></img>
+				<img src={user} alt="profile" onClick={handleClick}></img>
 			</header>
 			<main>
-				{profileOpen && <div className={styles.profileBox}>
-					<img src={user} className={styles.profileImg}/>
+				{profileOpen && <div className="profile-box">
+					<img src={user}/>
 					<p>{loginData.nickname}</p>
 					<p>Member Since : {loginData.signupDate}</p>
-					<div className={styles.mypage}>My Page</div>
-					<div className={styles.logout}>
+					<div className="my-page">My Page</div>
+					<div className="logout">
 						<img src={out}></img>
 						<p>Log Out</p>
 					</div>
 				</div>}
-				<div className={styles.container}>
-					<div className={styles.ad}>
-						<iframe className={styles.video} width="560" height="315" src="https://www.youtube.com/embed/A1TRiha3nLw?si=QIkGSQptMXyDjRnn" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-						<div className={styles.description}>
+				<div className="container">
+					<div className="ad">
+						<iframe className="video" width="560" height="315" src="https://www.youtube.com/embed/A1TRiha3nLw?si=QIkGSQptMXyDjRnn" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+						<div className="description">
 							<p>"Voices Of The Void"</p>
-							<div className={styles.photo}>
+							<div className="photo">
 								<img src={ad1} alt="ingame1"></img>
 								<img src={ad2} alt="ingame2"></img>
 								<img src={ad3} alt="ingame3"></img>
@@ -82,10 +81,10 @@ const HomeO = () => {
 							<Link to='/gamepost2'>PLAY!</Link>
 						</div>
 					</div>
-					<div className={styles.library}>
-						<div className={styles.latest}>
+					<div className="library">
+						<div className="latest">
 							<p>Latest Featured Games</p>
-							<div className={styles.game}>
+							<div className="game">
 								<div onClick={portal1} style={{cursor:'pointer'}}>
 									<img src={rog1} alt="thumbnail"></img>
 									<p>Die in the Dungeon</p>
@@ -106,9 +105,9 @@ const HomeO = () => {
 								</div>
 							</div>
 						</div>
-						<div className={styles.simulation}>
+						<div className="simulation">
 							<p>Simulation</p>
-							<div className={styles.game}>
+							<div className="game">
 								<div>
 									<img src={sim1} alt="thumbnail"></img>
 									<p>Ages of Conflict</p>
@@ -129,9 +128,9 @@ const HomeO = () => {
 								</div>
 							</div>
 						</div>
-						<div className={styles.roguelike}>
+						<div className="roguelike">
 							<p>Roguelike</p>
-							<div className={styles.game}>
+							<div className="game">
 								<div onClick={portal1} style={{cursor:'pointer'}}>
 									<img src={rog1} alt="thumbnail"></img>
 									<p>Die in the Dungeon</p>
@@ -160,4 +159,4 @@ const HomeO = () => {
 	)
 }
 
-export default HomeO;
+export default Home;
