@@ -24,7 +24,7 @@ const Signin = () => {
 		axios.post('http://localhost:8080/api/login',{
 			email: email,
 			password: pw
-		}).then((resp) => {
+		},{withCredentials: true}).then((resp) => {
 			window.location.href = '/homeo'
 		}).catch((err) => {
 			alert('아이디 혹은 비밀번호가 틀렸습니다.')

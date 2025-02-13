@@ -13,6 +13,19 @@ const AA = () => {
 	const handleClick=() => {
 		setProfileOpen(!profileOpen)
 	}
+	const [loginData,setLoginData] = useState({
+		nickname:'',
+		signupDate:''
+	})
+	const userData = () => {
+		axios.get('http://localhost:8080/api/info', { withCredentials: true })
+		.then((resp) => {
+			setLoginData(resp.data)
+		})
+	}
+	useEffect(() =>{
+		userData()
+	},[])
 
 	const [posts,setPosts] = useState([]);
 	const [totalPosts,setTotalPosts] = useState(0);
@@ -99,8 +112,8 @@ const AA = () => {
 			<main>
 				{profileOpen && <div className={styles.profileBox}>
 						<img src={user} className={styles.profileImg}/>
-						<p>Nickname</p>
-						<p>Member Since : 2025.02.02</p>
+						<p>{loginData.nickname}</p>
+						<p>Member Since : {loginData.signupDate}</p>
 						<div className={styles.mypage}>My Page</div>
 						<div className={styles.logout}>
 							<img src={out}></img>
@@ -145,7 +158,7 @@ const AA = () => {
 									</button>
 								</form>
 							</div>
-							<div className={styles.writebtn}>글쓰기</div>
+							<Link to='/write' className={styles.writebtn}>글쓰기</Link>
 						</div>
 					</div>
 					<div className={styles.page}>

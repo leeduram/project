@@ -50,55 +50,56 @@ main{
 	align-items: center;
 }
 .profileBox{
-	width: 480px;
-	height: 600px;
-	background-color: rgba(255, 255, 255, 0.4);
+	width: 360px;
+	height: 480px;
+	background-color: #454545;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	position: fixed;
-	z-index: 10000px;
+	position: absolute;
+	top: 50;
+	right: 0;
+	z-index: 1000;
 }
 .profileImg{
-	width: 160px;
-	height: 160px;
+	width: 120px;
+	height: 120px;
 	margin-top: 32px;
 }
 .profileBox > p:nth-of-type(1){
 	color: white;
-	font-size: 32px;
-	margin-top: 60px;
+	font-size: 24px;
+	margin-top: 32px;
 }
 .profileBox > p:nth-of-type(2){
 	color: white;
-	font-size: 28px;
-	margin-top: 12px;
+	font-size: 20px;
+	margin-top: 16px;
 }
 .mypage{
-	width: 240px;
-	height: 48px;
-	background-color: white;
+	width: 180px;
+	height: 36px;
+	background-color: rgb(255, 255, 255);
 	border-radius: 16px;
-	font-size: 24px;
+	font-size: 20px;
 	text-align: center;
-	line-height: 48px;
+	line-height: 36px;
 	margin-top: 60px;
 }
 .logout{
-	width: 240px;
-	height: 48px;
-	background-color: #1F3A5F;
+	width: 180px;
+	height: 36px;
+	background-color: #006fff;
 	border-radius: 16px;
 	color: white;
-	font-size: 20px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	margin-top: 12px;
+	margin-top: 16px;
 }
 .logout img{
-	width: 32px;
-	height: 32px;
+	width: 24px;
+	height: 24px;
 }
 .container{
     width: 1400px;
@@ -239,6 +240,7 @@ select{
     background-color: black;
     color: white;
     text-align: center;
+	text-decoration: none;
 }
 .page{
     display: flex;

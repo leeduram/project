@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom"
 import b from '../img/b.png'
 import user from '../img/user.png'
+import out from '../img/logout.png'
 import ad1 from '../img/ad1.png' 
 import ad2 from '../img/ad2.png' 
 import ad3 from '../img/ad3.png'
@@ -13,11 +14,26 @@ import rog2 from '../img/rog2.png'
 import rog3 from '../img/rog3.png'
 import '../css/-reset.css'
 import styles from '../css/HomeO.module.css'
+import axios from "axios";
 
 const HomeO = () => {
+	const [profileOpen,setProfileOpen] = useState(false);
 	const handleClick=() => {
-		alert("유저 관련 툴 만들기 or figma 따라가기")
+		setProfileOpen(!profileOpen)
 	}
+	const [loginData,setLoginData] = useState({
+		nickname:'',
+		signupDate:''
+	})
+	const userData = () => {
+		axios.get('http://localhost:8080/api/info', { withCredentials: true })
+		.then((resp) => {
+			setLoginData(resp.data)
+		})
+	}
+	useEffect(() =>{
+		userData()
+	},[])
 
 	const navi = useNavigate();
 	const portal1 = () => {
@@ -42,6 +58,16 @@ const HomeO = () => {
 				<img src={user} alt="profile" className={styles.imgbtn} onClick={handleClick}></img>
 			</header>
 			<main>
+				{profileOpen && <div className={styles.profileBox}>
+					<img src={user} className={styles.profileImg}/>
+					<p>{loginData.nickname}</p>
+					<p>Member Since : {loginData.signupDate}</p>
+					<div className={styles.mypage}>My Page</div>
+					<div className={styles.logout}>
+						<img src={out}></img>
+						<p>Log Out</p>
+					</div>
+				</div>}
 				<div className={styles.container}>
 					<div className={styles.ad}>
 						<iframe className={styles.video} width="560" height="315" src="https://www.youtube.com/embed/A1TRiha3nLw?si=QIkGSQptMXyDjRnn" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
