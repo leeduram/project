@@ -1,16 +1,16 @@
+import axios from "axios"
 import React, { useState } from "react"
 import { Link } from "react-router-dom"
-import b from '../img/b.png'
-import player from '../img/player.jpg'
 import '../css/-reset.css'
 import '../css/SignIn.css'
-import axios from "axios"
+import b from '../img/b.png'
+import player from '../img/player.jpg'
 
 const Signin = () => {
 	const [email,setEmail] = useState('')
 	const [pw,setPw] = useState('')
 	const bntActivation = email && pw
-	
+
 	const handleChangeEmail = (e) => {
 	const value = e.target.value;
 		setEmail(value);
@@ -26,7 +26,7 @@ const Signin = () => {
 			password: pw
 		},{withCredentials: true}).then((resp) => {
 			window.location.href = '/home'
-		}).catch((err) => {
+		}).catch(() => {
 			alert('아이디 혹은 비밀번호가 틀렸습니다.')
 		})
 	}

@@ -1,10 +1,10 @@
+import axios from "axios"
 import React, { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
-import b from '../img/b.png'
-import developer from '../img/developer.png'
 import '../css/-reset.css'
 import '../css/SignUp.css'
-import axios from "axios"
+import b from '../img/b.png'
+import developer from '../img/developer.png'
 
 const Signup = () => {
 	const [data,setData] = useState([{
@@ -46,7 +46,7 @@ const Signup = () => {
 	const lowerNicknameList = nicknameList.map((data) => {
 		return data.toLowerCase();
 	})
-	
+
 	useEffect(() => {
 		axios.get('http://localhost:8080/api/allData')
 		.then((resp) => {
@@ -64,7 +64,7 @@ const Signup = () => {
 			}
 		}
 	},[repw, pw])
-	
+
 	const handleChangeEmail = (e) => {
 		const value = e.target.value;
 		const lowerValue = value.toLowerCase();

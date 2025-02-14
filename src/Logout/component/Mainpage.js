@@ -1,9 +1,9 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import b from '../img/b.png'
-import man from '../img/man.jpg'
 import '../css/-reset.css'
 import '../css/Mainpage.css'
+import b from '../img/b.png'
+import man from '../img/man.jpg'
 
 const Mainpage = () => {
 

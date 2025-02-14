@@ -1,38 +1,53 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import '../css/-reset.css';
+import '../css/Board.css';
 import b from '../img/b.png';
-import user from '../img/user.png';
-import out from '../img/logout.png'
+import out from '../img/logout.png';
 import search from '../img/search.png';
-import '../css/-reset.css'
-import styles from '../css/Board.module.css'
-import axios from "axios";
+import user from '../img/user.png';
 
-const AA = () => {
+const Board = () => {
 	const [profileOpen,setProfileOpen] = useState(false);
-	const handleClick=() => {
-		setProfileOpen(!profileOpen)
-	}
 	const [loginData,setLoginData] = useState({
 		nickname:'',
 		signupDate:''
 	})
-	const userData = () => {
-		axios.get('http://localhost:8080/api/info', { withCredentials: true })
-		.then((resp) => {
-			setLoginData(resp.data)
-		})
-	}
-	useEffect(() =>{
-		userData()
-	},[])
-
 	const [posts,setPosts] = useState([]);
 	const [totalPosts,setTotalPosts] = useState(0);
 	const [currentPage,setCurrentPage] = useState(1);
 	const [limit,setLimit] = useState(10);
 	const [pageBtn,setPageBtn] = useState([]);
 	const [totalPage,setTotalPage] = useState(0);
+
+	useEffect(() =>{
+		axios.get('http://localhost:8080/api/info', { withCredentials: true })
+		.then((resp) => {
+			setLoginData(resp.data)
+		})
+	},[])
+	useEffect(() => {
+		postList(currentPage, limit)
+		movePageBtn();
+	},[currentPage,limit,totalPosts]);
+	//글이 추가되거나 삭제됐을 때 변화하는 totalPosts에도 영향을 받아야 함
+	useEffect(() => {
+		// 페이지 번호가 localStorage에 있는지 확인하고, 있으면 해당 페이지로 이동
+		const storedPage = localStorage.getItem('currentPage');
+		if (storedPage) {
+			setCurrentPage(Number(storedPage));
+		} else {
+			setCurrentPage(1); // 기본값은 1
+		}
+		
+		postList(currentPage, limit);
+		movePageBtn();
+	}, [limit]);
+	useEffect(() => {
+		// currentPage가 변경될 때마다 localStorage에 현재 페이지 번호 저장
+		localStorage.setItem('currentPage', currentPage);
+	}, [currentPage]);
 
 	const postList = (page, limit) => {
 		axios.post('http://localhost:8080/api/page',{
@@ -43,12 +58,10 @@ const AA = () => {
 			setTotalPosts(resp.data.totalPosts);
 		})
 	}
-
 	const formatDate = (dateString) => {
 		const date = new Date(dateString);
 		return date.toLocaleDateString('ko-kr');
 	}
-
 	const movePageBtn = () => {
 		const totalPage = Math.ceil(totalPosts / limit)
 		setTotalPage(totalPage)
@@ -70,110 +83,89 @@ const AA = () => {
 
 		setPageBtn(btns);
 	}
-
-	useEffect(() => {
-		postList(currentPage, limit)
-		movePageBtn();
-	},[currentPage,limit,totalPosts]);
-	//글이 추가되거나 삭제됐을 때 변화하는 totalPosts에도 영향을 받아야 함
-
-	useEffect(() => {
-		// 페이지 번호가 localStorage에 있는지 확인하고, 있으면 해당 페이지로 이동
-		const storedPage = localStorage.getItem('currentPage');
-		if (storedPage) {
-			setCurrentPage(Number(storedPage));
-		} else {
-			setCurrentPage(1); // 기본값은 1
-		}
-	
-		postList(currentPage, limit);
-		movePageBtn();
-	}, [limit]);
-	
-	useEffect(() => {
-		// currentPage가 변경될 때마다 localStorage에 현재 페이지 번호 저장
-		localStorage.setItem('currentPage', currentPage);
-	}, [currentPage]);
+	const handleClick=() => {
+		setProfileOpen(!profileOpen)
+	}
 
 	return(
 		<>
-			<header className={styles.loginHeader}>
-				<div className={styles.site}>
+			<header className="login-header">
+				<div className="logo">
 					<img src={b} alt="logo"></img>
 					<p>bZip</p>
 				</div>
-				<div className={styles.category}>
-					<Link to='/homeo' className={styles.categoryBtn}>Home</Link>
-					<Link to='/fix' className={styles.categoryBtn}>Upload</Link>
-					<Link to='/board' className={styles.categoryBtn}>Community</Link>
+				<div className="category">
+					<Link to='/home'>Home</Link>
+					<Link to='/fix'>Upload</Link>
+					<Link to='/board'>Community</Link>
 				</div>
-				<img src={user} alt="profile" className={styles.imgbtn} onClick={handleClick}></img>
+				<img src={user} alt="profile" onClick={handleClick}></img>
 			</header>
-			<main>
-				{profileOpen && <div className={styles.profileBox}>
-						<img src={user} className={styles.profileImg}/>
-						<p>{loginData.nickname}</p>
-						<p>Member Since : {loginData.signupDate}</p>
-						<div className={styles.mypage}>My Page</div>
-						<div className={styles.logout}>
-							<img src={out}></img>
-							<p>Log Out</p>
-						</div>
-					</div>}
-                <div className={styles.container}>
-                    <p className={styles.h1}>자유 게시판</p>
-                    <div className={styles.h2}>
+			<main className="board-main">
+				{profileOpen && <div className="profile-box">
+					<img src={user}/>
+					<p>{loginData.nickname}</p>
+					<p>Member Since : {loginData.signupDate}</p>
+					<div className="my-page">My Page</div>
+					<div className="logout">
+						<img src={out}></img>
+						<p>Log Out</p>
+					</div>
+				</div>}
+                <div className="container">
+                    <h1>자유 게시판</h1>
+                    <div className="h2">
                         <p>공지사항</p>
                         <p>자유 게시판</p>
                     </div>
-                    <div className={styles.subcontainer}>
-                        <div className={styles.box}>
-                            <div className={styles.num}>번호</div>
-                            <div className={styles.title}>제목</div>
-                            <div className={styles.writer}>작성자</div>
-                            <div className={styles.date}>작성 시간</div>
+                    <div className="subcontainer">
+                        <div className="box">
+                            <div>번호</div>
+                            <div>제목</div>
+                            <div>작성자</div>
+                            <div>작성 시간</div>
                         </div>
 						{posts.map((post) => {
 							return(
-								<div key={post.uid} className={styles.box1}>
-									<div className={styles.num}>{post.uid}</div>
-									<div className={styles.dataTitle}>{post.title}</div>
-									<div className={styles.writer}>{post.user.nickname}</div>
-									<div className={styles.date}>{formatDate(post.writeDate)}</div>
+								<div key={post.uid} className="box1">
+									<div>{post.uid}</div>
+									<div>{post.title}</div>
+									<div>{post.user.nickname}</div>
+									<div>{formatDate(post.writeDate)}</div>
 								</div>
 							)
 						})}
                     </div>
-					<div className={styles.searchTool}>
-						<div className={styles.tool}>
-							<div className={styles.search}>
+					<div className="tool-arrange">
+						<div className="tool">
+							<div className="search">
 								<select>
 									<option>제목</option>
 									<option>닉네임</option>
 								</select>
-								<form className={styles.input}>
+								<form className="input">
 									<input></input>
-									<button type="button" className={styles.searchbtn}>
+									<button type="button">
 										<img src={search}/>
 									</button>
 								</form>
 							</div>
-							<Link to='/write' className={styles.writebtn}>글쓰기</Link>
+							<Link to='/write'>글쓰기</Link>
 						</div>
 					</div>
-					<div className={styles.page}>
-						<button className={styles.moveBtn} onClick={() => {
+					<div className="page">
+						<button className="move-btn" onClick={() => {
 							currentPage > 1 && setCurrentPage(currentPage - 1)
 						}} disabled={currentPage === 1}>&lt;</button>
 						{pageBtn.map((btn) => {
 							return(
-								<button className={`${styles.moveBtn} ${btn === currentPage? styles.active : ''}`} 
+								<button className={`move-btn ${btn === currentPage? "active" : ''}`} 
 								key={btn} onClick={() => {
 									setCurrentPage(btn)
 								}}>{btn}</button>
 							)
 						})}
-						<button className={styles.moveBtn} onClick={() => {
+						<button className="move-btn" onClick={() => {
 							currentPage < totalPage && setCurrentPage(currentPage + 1)
 						}} disabled={currentPage === totalPage}>&gt;</button>
 					</div>
@@ -184,4 +176,4 @@ const AA = () => {
 	)
 }
 
-export default AA;
+export default Board;

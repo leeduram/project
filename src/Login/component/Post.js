@@ -1,55 +1,73 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import b from '../proimg/b.png';
-import user from '../proimg/user.png';
-import './reset.css'
-import styles from './Post.module.css'
+import '../css/-reset.css';
+import '../css/Post.css';
+import b from '../img/b.png';
+import out from '../img/logout.png';
+import user from '../img/user.png';
 
 const Post = () => {
+	const [profileOpen,setProfileOpen] = useState(false);
+	const [loginData,setLoginData] = useState({
+		nickname:'',
+		signupDate:''
+	})
+	const [postData,setPostData] = useState({
+		title:'',
+		nickname:'',
+		writeDate:''
+	})
+
+	useEffect(() =>{
+		axios.get('http://localhost:8080/api/info', { withCredentials: true })
+		.then((resp) => {
+			setLoginData(resp.data)
+		})
+	},[])
+	useEffect(() => {
+		axios
+	})
+
 	const handleClick=() => {
-		alert("유저 관련 툴 만들기 or figma 따라가기")
+		setProfileOpen(!profileOpen)
 	}
 
 	return(
 		<>
-			<header className={styles.loginHeader}>
-				<div className={styles.site}>
+			<header className="login-header">
+				<div className="logo">
 					<img src={b} alt="logo"></img>
 					<p>bZip</p>
 				</div>
-				<div className={styles.category}>
-					<Link to='/home' style={{
-						color:"white",
-						fontSize:"30px",
-						fontWeight:"400",
-						textDecoration:"none"
-					}}>Home</Link>
-						<Link to='/upload' style={{
-						color:"white",
-						fontSize:"30px",
-						fontWeight:"400",
-						textDecoration:"none"
-					}}>Upload</Link>
-					<Link to='/community' style={{
-						color:"white",
-						fontSize:"30px",
-						fontWeight:"400",
-						textDecoration:"none"
-					}}>Community</Link>
+				<div className="category">
+					<Link to='/home'>Home</Link>
+					<Link to='/fix'>Upload</Link>
+					<Link to='/board'>Community</Link>
 				</div>
-				<img src={user} alt="profile" className={styles.imgbtn} onClick={handleClick}></img>
+				<img src={user} alt="profile" onClick={handleClick}></img>
 			</header>
-			<main>
-                <div className={styles.container}>
-                    <div className={styles.post}>
-                        <div className={styles.title}>
-                            <p>제목입니다</p>
-                            <div className={styles.pbox}>
-                                <p>유저</p>
+			<main className="post-main">
+				{profileOpen && <div className="profile-box">
+					<img src={user}/>
+					<p>{loginData.nickname}</p>
+					<p>Member Since : {loginData.signupDate}</p>
+					<div className="my-page">My Page</div>
+					<div className="logout">
+						<img src={out}></img>
+						<p>Log Out</p>
+					</div>
+				</div>}
+                <div className="container">
+                    <div>
+                        <div className="title">
+                            <p>title</p>
+                            <div className="pbox">
+                                <p>nickname</p>
                                 <p>2025.01.21</p>
                             </div>
                         </div>
-                        <div className={styles.desc}>
+                        <div className="content">
                             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. <br/>
                             Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, <br/>
                             when an unknown printer took a galley of type and scrambled it to make a type specimen book. <br/>
@@ -58,13 +76,13 @@ const Post = () => {
                             and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
                         </div>
                     </div>
-                    <div className={styles.bar}>
-                        <div className={styles.btn}>
+                    <div className="bar">
+                        <div className="btn">
                             <div>수정</div>
                             <div>삭제</div>
+                            <div>취소</div>
                         </div>
                     </div>
-                    <div className={styles.line}></div>
                 </div>
             </main>
 			<footer>Copyright © 2025 bZip</footer>

@@ -1,11 +1,11 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import '../css/-reset.css';
+import '../css/HeaderFooter.css';
 import b from '../img/b.png';
+import out from '../img/logout.png';
 import user from '../img/user.png';
-import out from '../img/logout.png'
-import '../css/-reset.css'
-import '../css/HeaderFooter.css'
-import axios from "axios";
 
 const HeaderFooter = () => {
 	const [profileOpen,setProfileOpen] = useState(false);
@@ -24,7 +24,7 @@ const HeaderFooter = () => {
 	const handleClick=() => {
 		setProfileOpen(!profileOpen)
 	}
-	
+
 	return(
 		<>
 			<header className="login-header">

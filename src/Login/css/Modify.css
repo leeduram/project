@@ -1,0 +1,63 @@
+.modify-main .container{
+	width: 1400px;
+	height: 800px;
+	background-color: white;
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+	align-items: center;
+	margin-top: 60px;
+	margin-bottom: 60px;
+}
+.modify-main .container > :nth-child(1){
+	width: 1000px;
+	height: 48px;
+	font-size: 40px;
+	font-weight:700;
+	margin-top: 50px;
+}
+.modify-main input{
+	width: 1000px;
+	height: 60px;
+	padding: 8px;
+	border: 0.5px solid #D9D9D9;
+	border-bottom: 0px;
+	box-sizing: border-box;
+	outline: none;
+	font-size: 24px;
+}
+.modify-main .ql-container  {
+	width: 1000px;
+	height: 496px;
+}
+.modify-main .container > :nth-child(3){
+	width: 1000px;
+	height: 30px;
+	display: flex;
+	justify-content: end;
+}
+.modify-main .btn{
+	display: flex;
+	gap: 12px;
+}
+.modify-main .btn button{
+	width: 80px;
+	height: 30px;
+	background-color: black;
+	border: 0px;
+	color: white;
+	font-size: 16px;
+	text-align: center;
+	line-height: 30px;
+	cursor: pointer;
+}
+.modify-main .btn a{
+	width: 80px;
+	height: 30px;
+	border: 1px solid black;
+	box-sizing: border-box;
+	color: black;
+	text-align: center;
+	line-height: 30px;
+	text-decoration: none;
+}

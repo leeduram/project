@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import '../css/-reset.css';
+import '../css/ExceptionMain.css';
 import b from '../img/b.png';
-import '../css/-reset.css'
-import '../css/ExceptionMain.css'
 
 const ExceptionMain = () => {
 
