@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ReactQuill from 'react-quill-new';
 import 'react-quill-new/dist/quill.snow.css';
 import { Link } from "react-router-dom";
@@ -19,6 +19,7 @@ const Write = () => {
 		title:undefined,
 		content:undefined
 	});
+	const contentRef = useRef(null); // useRef로 content 상태 추적
 
 	useEffect(() =>{
 		axios.get('http://localhost:8080/api/info', { withCredentials: true })
@@ -42,39 +43,37 @@ const Write = () => {
 				title:undefined
 			})
 		}
-		console.log(formData)
 	}
 	const handleChangeContent = (e) => {
-		setFormData({
-			...formData,
-			content:e === '<p><br></p>'? undefined : e
-		})
-		console.log(formData)
+			setFormData({
+				...formData,
+				content:e === '<p><br></p>' ? undefined : e
+			});
 	}
 	const handleClickPost = (e) => {
 		e.preventDefault();
-		if (formData.title == undefined || formData.content == undefined){
+		const cleanedContent = formData.content.replace(/<\/?[^>]+(>|$)/g, "").trim();
+		if (formData.title == undefined || cleanedContent == ''){
 			alert("제목과 내용은 필수로 기입하셔야 합니다.\n다시 확인해 주세요.")
 			return
 		}
 		axios.post('http://localhost:8080/api/post',{
 			title: formData.title,
-			content: formData.content
-		},{
-			withCredentials: true  // 쿠키를 서버에 전달하도록 설정
-		}).then(() => {
+			content: cleanedContent
+		},{withCredentials: true})
+		.then(() => {
 			window.location.href = '/board'
 		})
 	}
 
 	return(
 		<>
-			<header className="login-header">
-				<div className="logo">
+			<header className="user-header">
+				<div className="user-logo">
 					<img src={b} alt="logo"></img>
 					<p>bZip</p>
 				</div>
-				<div className="category">
+				<div className="user-category">
 					<Link to='/home'>Home</Link>
 					<Link to='/fix'>Upload</Link>
 					<Link to='/board'>Community</Link>
@@ -92,14 +91,17 @@ const Write = () => {
 						<p>Log Out</p>
 					</div>
 				</div>}
-				<div className="container">
+				<div className="write-container">
 					<p>글 작성</p>
 					<div>
 						<input onChange={handleInputChange} name="title"/>
-						<ReactQuill theme="snow" value={formData.content} onChange={handleChangeContent} />
+						<ReactQuill theme="snow" value={formData.content} 
+						onChange={handleChangeContent} 
+						formats={['bold', 'italic', 'underline', 'link', 'blockquote']}
+						/>
 					</div>
 					<div>
-						<div className="btn">
+						<div className="write-btn">
 							<button onClick={handleClickPost}>작성</button>
 							<Link to='/board'>취소</Link>
 						</div>

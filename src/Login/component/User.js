@@ -2,12 +2,12 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import '../css/-reset.css';
-import '../css/HeaderFooter.css';
+import '../css/User.css';
 import b from '../img/b.png';
 import out from '../img/logout.png';
 import user from '../img/user.png';
 
-const HeaderFooter = () => {
+const User = () => {
 	const [profileOpen,setProfileOpen] = useState(false);
 	const [loginData,setLoginData] = useState({
 		nickname:'',
@@ -27,12 +27,12 @@ const HeaderFooter = () => {
 
 	return(
 		<>
-			<header className="login-header">
-				<div className="logo">
+			<header className="user-header">
+				<div className="user-logo">
 					<img src={b} alt="logo"></img>
 					<p>bZip</p>
 				</div>
-				<div className="category">
+				<div className="user-category">
 					<Link to='/home'>Home</Link>
 					<Link to='/fix'>Upload</Link>
 					<Link to='/board'>Community</Link>
@@ -56,4 +56,4 @@ const HeaderFooter = () => {
 	)
 }
 
-export default HeaderFooter;
+export default User;

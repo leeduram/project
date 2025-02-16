@@ -161,48 +161,48 @@ const Signup = () => {
 
 	return(
 		<>
-			<header className="only-logo">
+			<header className="header-logo">
 				<img src={b} alt="logo"></img>
 				<p>bZip</p>
 			</header>
 			<main className="signup-main">
-				<div className="container">
+				<div className="signup-container">
 					<div>
 						<h1>Create Account</h1>
-						<div className="id">
-							<p className="label">E-mail ID</p>
+						<div className="signup-id">
+							<p className="signup-label">E-mail ID</p>
 							<input type="email" name="email" onChange={handleChangeEmail}
 							style={{outline:duplicatedEmail? '1px solid red':'none'}}/>
-							{emailError && <p className="error">{emailError}</p>}
-							{duplicatedEmail && <p className="error">{duplicatedEmail}</p>}
+							{emailError && <p className="signup-error">{emailError}</p>}
+							{duplicatedEmail && <p className="signup-error">{duplicatedEmail}</p>}
 						</div>
-						<div className="pw">
-							<p className="label">Password</p>
+						<div className="signup-pw">
+							<p className="signup-label">Password</p>
 							<input type="password" name="password" onChange={handleChangePw}/>
-							{pwError && <p className="error">{pwError}</p>}
+							{pwError && <p className="signup-error">{pwError}</p>}
 						</div>
-						<div className="repw">
-							<p className="label">Re-Password</p>
+						<div className="signup-repw">
+							<p className="signup-label">Re-Password</p>
 							<input type="password" name="repw" onChange={handleChangeRepw}
 							style={{outline:repwError? '1px solid red':'none'}}/>
-							{repwError && <p className="error">{repwError}</p>}
+							{repwError && <p className="signup-error">{repwError}</p>}
 						</div>
-						<div className="name">
-							<p className="label">Name</p>
+						<div className="signup-name">
+							<p className="signup-label">Name</p>
 							<input type="text" name="name" onChange={handleChangeName}/>
-							{nameError && <p className="error">{nameError}</p>}
+							{nameError && <p className="signup-error">{nameError}</p>}
 						</div>
-						<div className="nickname">
-							<p className="label">Nickname</p>
+						<div className="signup-nickname">
+							<p className="signup-label">Nickname</p>
 							<input type="text" name="nickname" onChange={handleChangeNickname}
 							style={{outline:duplicatedNickname? '1px solid red':'none'}}/>
-							{nicknameError && <p className="error">{nicknameError}</p>}
-							{duplicatedNickname && <p className="error">{duplicatedNickname}</p>}
+							{nicknameError && <p className="signup-error">{nicknameError}</p>}
+							{duplicatedNickname && <p className="signup-error">{duplicatedNickname}</p>}
 						</div>
-						<div className="btn">
+						<div className="signup-btn">
 							<button onClick={handleClick}
 							disabled={!btnActivation}>Sign Up</button>
-							<div className="textBtn">
+							<div className="signup-text-btn">
 								<p>Already have an account?</p>
 								<Link to='/signin'>Sign In</Link>
 							</div>

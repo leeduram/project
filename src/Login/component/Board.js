@@ -89,12 +89,12 @@ const Board = () => {
 
 	return(
 		<>
-			<header className="login-header">
-				<div className="logo">
+			<header className="user-header">
+				<div className="user-logo">
 					<img src={b} alt="logo"></img>
 					<p>bZip</p>
 				</div>
-				<div className="category">
+				<div className="user-category">
 					<Link to='/home'>Home</Link>
 					<Link to='/fix'>Upload</Link>
 					<Link to='/board'>Community</Link>
@@ -112,14 +112,14 @@ const Board = () => {
 						<p>Log Out</p>
 					</div>
 				</div>}
-                <div className="container">
+                <div className="board-container">
                     <h1>자유 게시판</h1>
-                    <div className="h2">
+                    <div className="board-h2">
                         <p>공지사항</p>
                         <p>자유 게시판</p>
                     </div>
-                    <div className="subcontainer">
-                        <div className="box">
+                    <div className="board-sub-container">
+                        <div className="board-box1">
                             <div>번호</div>
                             <div>제목</div>
                             <div>작성자</div>
@@ -127,45 +127,33 @@ const Board = () => {
                         </div>
 						{posts.map((post) => {
 							return(
-								<div key={post.uid} className="box1">
+								<div key={post.uid} className="board-box2">
 									<div>{post.uid}</div>
-									<div>{post.title}</div>
+									<div>
+										<Link to={`/post/${post.uid}`}>{post.title}</Link>
+									</div>
 									<div>{post.user.nickname}</div>
 									<div>{formatDate(post.writeDate)}</div>
 								</div>
 							)
 						})}
                     </div>
-					<div className="tool-arrange">
-						<div className="tool">
-							<div className="search">
-								<select>
-									<option>제목</option>
-									<option>닉네임</option>
-								</select>
-								<form className="input">
-									<input></input>
-									<button type="button">
-										<img src={search}/>
-									</button>
-								</form>
-							</div>
+					<div className="board-tool-arrange">
 							<Link to='/write'>글쓰기</Link>
-						</div>
 					</div>
-					<div className="page">
-						<button className="move-btn" onClick={() => {
+					<div className="board-page">
+						<button className="board-move-btn" onClick={() => {
 							currentPage > 1 && setCurrentPage(currentPage - 1)
 						}} disabled={currentPage === 1}>&lt;</button>
 						{pageBtn.map((btn) => {
 							return(
-								<button className={`move-btn ${btn === currentPage? "active" : ''}`} 
+								<button className={`board-move-btn ${btn === currentPage? "active" : ''}`} 
 								key={btn} onClick={() => {
 									setCurrentPage(btn)
 								}}>{btn}</button>
 							)
 						})}
-						<button className="move-btn" onClick={() => {
+						<button className="board-move-btn" onClick={() => {
 							currentPage < totalPage && setCurrentPage(currentPage + 1)
 						}} disabled={currentPage === totalPage}>&gt;</button>
 					</div>

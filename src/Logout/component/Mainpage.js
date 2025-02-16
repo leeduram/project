@@ -9,16 +9,16 @@ const Mainpage = () => {
 
 	return(
 		<>
-			<header className="header">
-				<div className="logo">
+			<header className="guest-header">
+				<div className="guest-logo">
 					<img src={b} alt="logo"></img>
 					<p>bZip</p>
 				</div>
-				<div className="category">
+				<div className="guest-category">
 					<Link to='/fix'>Home</Link>
 					<Link to='/fix'>Community</Link>
 				</div>
-				<div className="ui">
+				<div className="guest-ui">
 					<Link to='/signin'>Sign In</Link>
 					<Link to='/signup'>Sign Up</Link>
 				</div>
@@ -26,8 +26,8 @@ const Mainpage = () => {
 			<main className="mainpage-main">
 				<div>
 					<h1>Show off your talent</h1>
-					<div className="content">
-						<div className="text">
+					<div className="mainpage-content">
+						<div className="mainpage-text">
 							<p>Even small projects created by individuals<br/>
 							can receive warm encouragement from users.</p>
 							<p>Encourage developers through your sponsorship<br/>

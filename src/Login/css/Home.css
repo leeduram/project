@@ -1,4 +1,4 @@
-.ad{
+.home-ad{
 	width: 1400px;
 	height: 475px;
 	background-color: #454545;
@@ -7,30 +7,30 @@
 	justify-content: center;
 	gap: 80px;
 }
-.home-main .description{
+.home-description{
 	display: flex;
 	flex-direction: column;
 	gap: 24px;
 }
-.home-main .description > :nth-child(1){
+.home-description > :nth-child(1){
 	color: white;
 	font-size: 40px;
 	font-weight: 700;
 }
-.photo{
+.home-photo{
 	display: flex;
 	gap: 30px;
 }
-.photo img{
+.home-photo img{
 	width: 180px;
 	height: 101px;
 }
-.home-main .description > :nth-child(3){
+.home-description > :nth-child(3){
 	color: #006FFF;
 	font-size: 20px;
 	font-weight: 700;
 }
-.home-main .description a{
+.home-description a{
 	width: 150px;
 	height: 50px;
 	border: 3px solid white;
@@ -41,29 +41,29 @@
 	line-height: 50px;
 	text-decoration: none;
 }
-.library{
+.home-library{
 	display: flex;
 	flex-direction: column;
 	gap: 100px;
 	margin-top: 220px;
 	margin-bottom: 100px;
 }
-.latest, .simulation, .roguelike{
+.home-latest, .home-simulation, .home-roguelike{
 	display: flex;
 	flex-direction: column;
 	gap: 32px;
 }
-.latest > p:nth-of-type(1), .simulation > p:nth-of-type(1), .roguelike > p:nth-of-type(1){
+.home-latest > p, .simulation > p, .home-roguelike > p{
 	min-height: 73px;
 	color: white;
 	font-size: 60px;
 	font-weight: 700;
 }
-.game{
+.home-game{
 	display: flex;
 	gap: 100px;
 }
-.game div{
+.home-game div{
 	width: 400px;
 	height: 500px;
 	border: 1px solid white;
@@ -72,22 +72,22 @@
 	flex-direction: column;
 	gap: 12px;
 }
-.game img{
+.home-game img{
 	width: 398px;
 	height: 317px;
 }
-.game div > p:nth-of-type(1){
+.home-game div > p:nth-of-type(1){
 	color: white;
 	font-size: 30px;
 	font-weight: 700;
 	margin-left: 12px;
 }
-.game div > p:nth-of-type(2){
+.home-game div > p:nth-of-type(2){
 	color: #006FFF;
 	font-size: 20px;
 	margin-left: 12px;
 }
-.game div > p:nth-of-type(3){
+.home-game div > p:nth-of-type(3){
 	color: white;
 	font-size: 16px;
 	margin-left: 12px;

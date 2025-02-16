@@ -44,12 +44,12 @@ const Home = () => {
 
 	return(
 		<>
-			<header className="login-header">
-				<div className="logo">
+			<header className="user-header">
+				<div className="user-logo">
 					<img src={b} alt="logo"></img>
 					<p>bZip</p>
 				</div>
-				<div className="category">
+				<div className="user-category">
 					<Link to='/home'>Home</Link>
 					<Link to='/fix'>Upload</Link>
 					<Link to='/board'>Community</Link>
@@ -67,11 +67,19 @@ const Home = () => {
 						<p>Log Out</p>
 					</div>
 				</div>}
-				<div className="ad">
-					<iframe className="video" width="560" height="315" src="https://www.youtube.com/embed/A1TRiha3nLw?si=QIkGSQptMXyDjRnn" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-					<div className="description">
+				<div className="home-ad">
+					<iframe 
+					width="560" 
+					height="315" 
+					src="https://www.youtube.com/embed/A1TRiha3nLw?si=QIkGSQptMXyDjRnn" 
+					title="YouTube video player" 
+					frameborder="0" 
+					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+					referrerpolicy="strict-origin-when-cross-origin" 
+					allowfullscreen></iframe>
+					<div className="home-description">
 						<p>"Voices Of The Void"</p>
-						<div className="photo">
+						<div className="home-photo">
 							<img src={ad1} alt="ingame1"></img>
 							<img src={ad2} alt="ingame2"></img>								<img src={ad3} alt="ingame3"></img>
 						</div>
@@ -79,10 +87,10 @@ const Home = () => {
 						<Link to='/gamepost2'>PLAY!</Link>
 					</div>
 				</div>
-				<div className="library">
-					<div className="latest">
+				<div className="home-library">
+					<div className="home-latest">
 						<p>Latest Featured Games</p>
-						<div className="game">
+						<div className="home-game">
 							<div onClick={portal1} style={{cursor:'pointer'}}>
 								<img src={rog1} alt="thumbnail"></img>
 								<p>Die in the Dungeon</p>
@@ -103,9 +111,9 @@ const Home = () => {
 							</div>
 						</div>
 					</div>
-					<div className="simulation">
+					<div className="home-simulation">
 						<p>Simulation</p>
-						<div className="game">
+						<div className="home-game">
 							<div>
 								<img src={sim1} alt="thumbnail"></img>
 								<p>Ages of Conflict</p>
@@ -126,9 +134,9 @@ const Home = () => {
 							</div>
 						</div>
 					</div>
-					<div className="roguelike">
+					<div className="home-roguelike">
 						<p>Roguelike</p>
-						<div className="game">
+						<div className="home-game">
 							<div onClick={portal1} style={{cursor:'pointer'}}>
 								<img src={rog1} alt="thumbnail"></img>
 								<p>Die in the Dungeon</p>

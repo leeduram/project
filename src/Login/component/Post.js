@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import '../css/-reset.css';
 import '../css/Post.css';
 import b from '../img/b.png';
@@ -14,10 +14,14 @@ const Post = () => {
 		signupDate:''
 	})
 	const [postData,setPostData] = useState({
+		uid:null,
 		title:'',
 		nickname:'',
-		writeDate:''
+		writeDate:'',
+		content:''
 	})
+	const {uid} = useParams();
+	const navi = useNavigate();
 
 	useEffect(() =>{
 		axios.get('http://localhost:8080/api/info', { withCredentials: true })
@@ -26,21 +30,38 @@ const Post = () => {
 		})
 	},[])
 	useEffect(() => {
-		axios
-	})
+		axios.get(`http://localhost:8080/api/view/${uid}`, { withCredentials: true })
+		.then((resp) => {
+			const post = resp.data;
+			const formattedDate = new Date(post.writeDate).toLocaleDateString('ko-kr');
+			post.writeDate = formattedDate
+			setPostData(post)
+		})
+	},[uid])
 
 	const handleClick=() => {
 		setProfileOpen(!profileOpen)
 	}
+	const handleClickDelete = () => {
+		const confirmDelete = window.confirm("삭제하시겠습니까?");
+		if (confirmDelete) {
+			axios.delete(`http://localhost:8080/api/delete/${postData.uid}`, {
+				withCredentials: true
+			}).then(() => {
+				alert("삭제되었습니다.");
+				navi('/board');
+			})
+		}
+	}
 
 	return(
 		<>
-			<header className="login-header">
-				<div className="logo">
+			<header className="user-header">
+				<div className="user-logo">
 					<img src={b} alt="logo"></img>
 					<p>bZip</p>
 				</div>
-				<div className="category">
+				<div className="user-category">
 					<Link to='/home'>Home</Link>
 					<Link to='/fix'>Upload</Link>
 					<Link to='/board'>Community</Link>
@@ -58,29 +79,24 @@ const Post = () => {
 						<p>Log Out</p>
 					</div>
 				</div>}
-                <div className="container">
+                <div className="post-container">
                     <div>
-                        <div className="title">
-                            <p>title</p>
-                            <div className="pbox">
-                                <p>nickname</p>
-                                <p>2025.01.21</p>
+                        <div className="post-title">
+                            <p>{postData.title}</p>
+                            <div className="post-box">
+                                <p>{postData.user ? postData.user.nickname : '알 수 없음'}</p>
+                                <p>{postData.writeDate}</p>
                             </div>
                         </div>
-                        <div className="content">
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. <br/>
-                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, <br/>
-                            when an unknown printer took a galley of type and scrambled it to make a type specimen book. <br/>
-                            It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.<br/>
-                            It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, <br/>
-                            and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                        </div>
+                        <div className="post-content">
+                            <p>{postData.content}</p>
+						</div>
                     </div>
-                    <div className="bar">
-                        <div className="btn">
-                            <div>수정</div>
-                            <div>삭제</div>
-                            <div>취소</div>
+                    <div className="post-flex">
+                        <div className="post-btn">
+                            <Link to={`/modify/${postData.uid}`}>수정</Link>
+                            <div onClick={handleClickDelete}>삭제</div>
+                            <Link to='/board'>취소</Link>
                         </div>
                     </div>
                 </div>

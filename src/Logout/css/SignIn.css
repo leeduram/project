@@ -1,4 +1,4 @@
-.only-logo{
+.header-logo{
 	width: 100%;
 	height: 100px;
 	background-color: #050B17;
@@ -6,22 +6,22 @@
 	align-items: center;
 	justify-content: center;
 }
-.only-logo img{
+.header-logo img{
 	width: 80px;
 	height: 80px;
 }
-.only-logo p{
+.header-logo p{
 	color: white;
 	font-size: 60px;
 	font-weight: 700;
 }
 
-.signin-main .container{
+.signin-container{
 	display: flex;
 	padding-top: 60px;
 	padding-bottom: 60px;
 }
-.container > div:nth-child(1){
+.signin-container > div:nth-child(1){
 	width: 736px;
 	height: 800px;
 	background-color: white;
@@ -29,37 +29,37 @@
 	flex-direction: column;
 	align-items: center;
 }
-.signin-main .title{
+.signin-main .signin-title{
 	width: 460px;
 	height: 72px;
 	margin-top: 60px;
 }
-.title h1{
+.signin-title h1{
 	color: black;
 	font-size: 40px;
 	font-weight: 700;
 }
-.title p{
+.signin-title p{
 	color: black;
 	font-size: 20px;
 	font-weight: 700;
 }
-.id{
+.signin-id{
 	width: 460px;
 	height: 62px;
 	margin-top: 60px;
 }
-.pw{
+.signin-pw{
 	width: 460px;
 	height: 62px;
 	margin-top: 16px;
 }
-.id p, .pw p{
+.signin-id p, .signin-pw p{
 	color: black;
 	font-size: 20px;
 	font-weight: 700;
 }
-.id input, .pw input{
+.signin-id input, .signin-pw input{
 	width: 460px;
 	height: 30px;
 	margin-top: 8px;
@@ -78,8 +78,9 @@
 	text-align: center;
 	line-height: 80px;
 	text-decoration: none;
+	cursor: pointer;
 }
-.line{
+.signin-line{
 	width: 460px;
 	border-top: 1px #6C6C6C solid;
 	margin-top: 60px;
@@ -92,7 +93,7 @@
 	font-weight: 700;
 	text-decoration: none;
 }
-.container img{
+.signin-container img{
 	width: 736px;
 	height: 800px;
 }

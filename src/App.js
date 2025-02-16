@@ -10,24 +10,24 @@ import Post from './Login/component/Post';
 import Modify from './Login/component/Modify';
 
 //header, main, footer
-import HeaderFooter from './Login/component/HeaderFooter';
-import ExceptionMain from './Logout/component/ExceptionMain';
+import Guest from './Logout/component/Guest';
+import User from './Login/component/User';
 
 function App() {
 	
 	return(
 	<>
 		<Routes>
-			<Route path='/aa' element={<HeaderFooter/>}/>
-			<Route path='/bb' element={<ExceptionMain/>}/>
+			<Route path='/aa' element={<Guest/>}/>
+			<Route path='/bb' element={<User/>}/>
 			<Route path='/' element={<Mainpage/>}/>
 			<Route path='/signup' element={<Signup/>}/>
 			<Route path='/signin' element={<Signin/>}/>
 			<Route path='/home' element={<Home/>}/>
 			<Route path='/board' element={<Board/>}/>
 			<Route path='/write' element={<Write/>}/>
-			<Route path='/post' element={<Post/>}/>
-			<Route path='/modify' element={<Modify/>}/>
+			<Route path='/post/:uid' element={<Post/>}/>
+			<Route path='/modify/:uid' element={<Modify/>}/>
 		</Routes>
 	</>
 	)

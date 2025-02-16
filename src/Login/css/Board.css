@@ -1,4 +1,4 @@
-.board-main .container{
+.board-container{
     width: 1400px;
     height: 800px;
     background-color: white;
@@ -8,12 +8,12 @@
     flex-direction: column;
     align-items: center;
 }
-.container h1{
+.board-container h1{
     font-size: 50px;
     font-weight: 700;
     margin-top: 60px;
 }
-.h2{
+.board-h2{
     width: 308px;
     height: 36px;
     display: flex;
@@ -21,43 +21,43 @@
     margin-top: 24px;
     margin-bottom: 24px;
 }
-.h2 p{
+.board-h2 p{
     font-size: 30px;
 }
-.subcontainer{
+.board-sub-container{
     width: 1200px;
     height: 440px;
     display: flex;
     flex-direction: column;
 }
-.box, .box1{
+.board-box1, .board-box2{
     width: 1200px;
     height: 40px;
     border-bottom: 1px solid black;
     display: flex;
     box-sizing: border-box;
 }
-.box div{
+.board-box1 div{
 	font-weight: 700;
 }
-.box1:hover{
+.board-box2:hover{
 	background-color: rgba(0, 0, 0, 0.041);
 }
-.box > div:nth-of-type(1), .box1 > div:nth-of-type(1){
+.board-box1 > div:nth-of-type(1), .board-box2 > div:nth-of-type(1){
     width: 40px;
     height: 40px;
     font-size: 20px;
     text-align: center;
     line-height: 40px;
 }
-.box > div:nth-of-type(2){
+.board-box1 > div:nth-of-type(2){
     width: 870px;
     height: 40px;
     font-size: 20px;
     text-align: center;
     line-height: 40px;
 }
-.box1 > div:nth-of-type(2){
+.board-box2 > div:nth-of-type(2){
     width: 870px;
     height: 40px;
     font-size: 20px;
@@ -65,88 +65,45 @@
     padding-left: 16px;
     box-sizing: border-box;
 }
-.box > div:nth-of-type(3), .box1 > div:nth-of-type(3){
+.board-box2 a {
+    color: black;
+    text-decoration: none;
+}
+.board-box1 > div:nth-of-type(3), .board-box2 > div:nth-of-type(3){
     width: 80px;
     height: 40px;
     font-size: 20px;
     text-align: center;
     line-height: 40px;
 }
-.box > div:nth-of-type(4), .box1 > div:nth-of-type(4){
+.board-box1 > div:nth-of-type(4), .board-box2 > div:nth-of-type(4){
     width: 210px;
     height: 40px;
     font-size: 20px;
     text-align: center;
     line-height: 40px;
 }
-.tool-arrange{
+.board-tool-arrange{
 	width: 1200px;
 	display: flex;
 	justify-content: flex-end;
-}
-.tool{
-    width: 770px;
-    height: 24px;
-    display: flex;
-    justify-content: space-between;
     margin-top: 16px;
 }
-.search{
-	width: 340px;
-	height: 24px;
-	display: flex;	
-}
-select{
-	width: 60px;
-	height: 24px;
-	font-size: 12px;
-	border-radius: 0px;
-	outline: none;
-}
-.input{
-	width: 280px;
-	height: 24px;
-	border: 1px solid black;
-	box-sizing: border-box;
-	outline: none;
-	display: flex;
-}
-.input input{
-	width: 248px;
-	height: 20px;
-	border: 0px;
-	outline: none;
-}
-.input button{
-	width: 32px;
-	height: 22px;
-	padding: 0px;
-	border: 0px;
-	box-sizing: border-box;
-	background-color: white;
-	cursor: pointer;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-.input button img{
-	width: 20px;
-	height: 20px;
-}
-.tool a{
-    width: 65px;
-    height: 20px;
+.board-tool-arrange a{
+    width: 80px;
+    height: 30px;
     background-color: black;
     color: white;
     text-align: center;
+    line-height: 30px;
 	text-decoration: none;
 }
-.page{
+.board-page{
     display: flex;
     gap: 6px;
     margin-top: 61px;
 }
-.move-btn{
+.board-move-btn{
     width: 30px;
     height: 30px;
 	background-color: white;
@@ -163,6 +120,6 @@ select{
 	color: white;
 	font-weight: 700;
 }
-.move-btn:disabled{
+.board-move-btn:disabled{
 	cursor: default;
 }

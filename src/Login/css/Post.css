@@ -6,7 +6,7 @@
 	align-items: center;
 	justify-content: center;
 }
-.post-main .container{
+.post-container{
     width: 1400px;
     background-color: white;
 	display: flex;
@@ -15,12 +15,12 @@
 	margin-top: 60px;
 	margin-bottom: 60px;
 }
-.post-main .container > div:nth-of-type(1){
+.post-container > div:nth-of-type(1){
     width: 1000px;
     height: 600px;
 	margin-top: 60px;
 }
-.post-main .title{
+.post-title{
     width: 1000px;
     height: 60px;
     border: 1px solid black;
@@ -29,30 +29,29 @@
     align-items: center;
     justify-content: space-between;
 }
-.post-main .title > :nth-child(1){
+.post-title > :nth-child(1){
     font-size: 30px;
     font-weight: 700;
     margin-left: 24px;
 }
-.post-main .pbox{
+.post-box{
     display: flex;
     gap: 24px;
     font-size: 20px;
     margin-top: 36px;
     margin-right: 24px;
 }
-.post-main .content{
+.post-content{
 	width: 1000px;
 	height: 540px;
 	border: 1px solid black;
 	border-top: 0px;
 	box-sizing: border-box;
 }
-.post-main .content p{
-    margin-top: 40px;
-    margin-left: 40px;
+.post-content p{
+    padding: 24px;
 }
-.post-main .bar{
+.post-flex{
     width: 1000px;
     height: 30px;
     margin-top: 24px;
@@ -60,25 +59,32 @@
     display: flex;
     justify-content: flex-end;
 }
-.post-main .btn{
+.post-btn{
     display: flex;
     gap: 12px;
 }
-.post-main .btn div{
+.post-btn div{
     width: 80px;
     height: 30px;
     text-align: center;
     line-height: 30px;
 }
-.post-main .btn > :nth-child(1){
+.post-btn > :nth-child(1){
     background-color: black;
     color: white;
 }
-.post-main .btn > :nth-child(2){
+.post-btn > :nth-child(2){
     background-color: black;
     color: white;
+    cursor: pointer;
 }
-.post-main .btn > :nth-child(3){
+.post-btn a{
+    width: 80px;
+    height: 30px;
     border: 1px solid black;
     box-sizing: border-box;
+    color: black;
+    text-decoration: none;
+    text-align: center;
+    line-height: 30px;
 }

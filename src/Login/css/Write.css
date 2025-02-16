@@ -1,4 +1,4 @@
-.write-main .container{
+.write-container{
 	width: 1400px;
 	height: 800px;
 	background-color: white;
@@ -9,7 +9,7 @@
 	margin-top: 60px;
 	margin-bottom: 60px;
 }
-.write-main .container > :nth-child(1){
+.write-container > :nth-child(1){
 	width: 1000px;
 	height: 48px;
 	margin-top: 50px;
@@ -31,17 +31,17 @@
 	width: 1000px;
 	height: 496px;
 }
-.write-main .container > :nth-child(3){
+.write-container > :nth-child(3){
 	width: 1000px;
 	height: 30px;
 	display: flex;
 	justify-content: end;
 }
-.write-main .btn{
+.write-btn{
 	display: flex;
 	gap: 12px;
 }
-.write-main .btn button{
+.write-btn button{
 	width: 80px;
 	height: 30px;
 	background-color: black;
@@ -52,7 +52,7 @@
 	line-height: 30px;
 	cursor: pointer;
 }
-.write-main .btn a{
+.write-btn a{
 	width: 80px;
 	height: 30px;
 	border: 1px solid black;

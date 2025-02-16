@@ -33,28 +33,28 @@ const Signin = () => {
 
 	return(
 		<>
-			<header className="only-logo">
+			<header className="header-logo">
 				<img src={b} alt="logo"></img>
 				<p>bZip</p>
 			</header>
 			<main className="signin-main">
-				<div className="container">
+				<div className="signin-container">
 					<div>
-						<div className="title">
+						<div className="signin-title">
 							<h1>WelCome Back!</h1>
 							<p>please  enter your details.</p>
 						</div>
-						<div className="id">
+						<div className="signin-id">
 							<p>E-mail ID</p>
 							<input type="email" name="email" onChange={handleChangeEmail}/>
 						</div>
-						<div className="pw">
+						<div className="signin-pw">
 							<p>Password</p>
 							<input type="password" name="password" onChange={handleChangePw}/>
 						</div>
 						<button onClick={handleClick}
 						disabled={!bntActivation}>Sign In</button>
-						<div className="line"/>
+						<div className="signin-line"/>
 						<Link to='/signup'>Have an account?</Link>
 					</div>
 					<img src={player} alt='player'></img>
