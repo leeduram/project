@@ -1,11 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import '../css/-reset.css';
+import '../css/reset.css';
 import '../css/Board.css';
 import b from '../img/b.png';
 import out from '../img/logout.png';
-import search from '../img/search.png';
 import user from '../img/user.png';
 
 const Board = () => {
@@ -107,10 +106,10 @@ const Board = () => {
 					<p>{loginData.nickname}</p>
 					<p>Member Since : {loginData.signupDate}</p>
 					<div className="my-page">My Page</div>
-					<div className="logout">
+					<Link to='/signin' className="logout">
 						<img src={out}></img>
 						<p>Log Out</p>
-					</div>
+					</Link>
 				</div>}
                 <div className="board-container">
                     <h1>자유 게시판</h1>

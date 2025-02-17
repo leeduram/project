@@ -1,13 +1,14 @@
-.container{
+.pay-container{
     width: 600px;
     height: 400px;
+	background-color: white;
     border: 1px solid black;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.title{
+.pay-title{
     width: 600px;
     height: 60px;
     border-bottom: 1px solid black;
@@ -19,38 +20,38 @@
     font-size: 20px;
     font-weight: 700;
 }
-.title > :nth-child(1){
+.pay-title > :nth-child(1){
     margin-left: 24px;
 }
-.title > :nth-child(2){
+.pay-title > :nth-child(2){
     margin-right: 24px;
 }
-.pay{
+.pay-payment{
     width: 468px;
     height: 305px;
     margin-top: 32px;
 }
-.pay > p:nth-of-type(1){
+.pay-payment > p:nth-of-type(1){
     font-size: 16px;
     font-weight: 400;
 }
-.pay > p:nth-of-type(2){
+.pay-payment > p:nth-of-type(2){
     font-size: 16px;
     font-weight: 400;
     color: #9E9E9E;
     margin-top: 16px;
 }
-.pay > p:nth-of-type(3){
+.pay-payment > p:nth-of-type(3){
     font-size: 20px;
     font-weight: 700;
     margin-top: 32px;
 }
-.pay > p:nth-of-type(4){
+.pay-payment > p:nth-of-type(4){
     font-size: 20px;
     font-weight: 700;
     margin-top: 48px;
 }
-.writePrice{
+.pay-container input{
     width: 468px;
     height: 40px;
     border: none;
@@ -60,19 +61,19 @@
     font-size: 20px;
     padding-left: 24px;
 }
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+.pay-container input::-webkit-outer-spin-button,
+.pay-container input::-webkit-inner-spin-button {
+-webkit-appearance: none;
+margin: 0;
 }
-.btn{
+.pay-btn{
     width: 242px;
     height: 48px;
     display: flex;
     gap: 12px;
     margin-top: 8px;
 }
-.kakao{
+.pay-kakao{
     width: 115px;
     height: 48px;
     background-color: #FFEB00;
@@ -80,12 +81,13 @@ input::-webkit-inner-spin-button {
     display: flex;
     align-items: center;
     justify-content: center;
+	cursor: pointer;
 }
-.kakao img{
+.pay-kakao img{
     width: 80px;
     height: 40px;
 }
-.card{
+.pay-card{
     width: 115px;
     height: 48px;
     background-color: #69B4FF;
@@ -94,10 +96,10 @@ input::-webkit-inner-spin-button {
     align-items: center;
     justify-content: space-between;
 }
-.card img{
+.pay-card img{
     margin-left: 8px;
 }
-.card p{
+.pay-card p{
     color: white;
     font-weight: 700;
     margin-right: 8px;

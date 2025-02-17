@@ -1,51 +1,4 @@
-.loginHeader{
-	width: 100%;
-	height: 100px;
-	background-color: #050B17;
-	display: flex;
-	justify-content: space-between;
-}
-.site{
-	width: 117px;
-	height: 50px;
-	display: flex;
-	margin-top: 25px;
-	margin-left: 32px;
-}
-.site img{
-	width: 50px;
-	height: 50px;
-}
-.site p{
-	color: white;
-	font-size: 30px;
-	font-weight: 700;
-	margin-top: 7px;
-}
-.category{
-	width: 476px;
-	height: 36px;
-	display: flex;
-	justify-content: space-between;
-	margin-top: 32px;
-}
-
-.imgbtn{
-	width: 48px;
-	height: 48px;
-	margin-top: 26px;
-	margin-right: 32px;
-	cursor: pointer;
-}
-
-main{
-	min-height: calc(100vh - 160px);
-	background-color: #050B17;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-.container{
+.price-container{
 	width: 940px;
 	min-height: calc(100vh - 280px);
 	background-color: #050B17;
@@ -56,11 +9,11 @@ main{
 	align-items: center;
 	gap: 8px;
 }
-.container > :nth-child(1){
+.price-container > :nth-child(1){
 	width: 876px;
 	height: 695px;
 }
-.photoZone{
+.price-photo{
 	width: 876px;
 	height: 494px;
 	background-color: black;
@@ -68,32 +21,32 @@ main{
 	flex-direction: column;
 	align-items: center;
 }
-.screen{
+.price-expand{
 	width: 558px;
 	height: 347px;
 	margin-top: 32px;
 }
-.expand{
+.price-expand img{
 	width: 558px;
 	height: 315px;
 }
-.photo{
+.price-default{
 	display: flex;
 	gap: 20px;
 }
-.photo img{
+.price-default img{
 width: 204px;
 height: 115px;
 cursor: pointer;
 }
-.description{
+.price-description{
 	width: 876px;
 	background-color: black;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
-.write{
+.price-post{
 	max-width: calc(100% - 48px);
 	display: flex;
 	flex-direction: column;
@@ -101,51 +54,60 @@ cursor: pointer;
 	padding-top: 32px;
 	padding-bottom: 32px;
 }
-.write p{
+.price-post p{
 	color: white;
 	font-size: 16px;
 	font-weight: 300;
 }
-.write h2{
+strong{
+	font-weight: 700;
+}
+.price-post h2{
 	color: white;
 	font-size: 1.5em;
 	font-weight: 700;
 }
-.write h3{
+.price-post h3{
 	color: white;
 	font-size: 1.3em;
 	font-weight: 700;
 }
-.information div{
+.price-information p{
+	color: #006fff;
+	text-decoration: underline;
+	cursor: pointer;
+	display: inline-block;
+}
+.price-information div{
 	width: 560px;
 	height: 400px;
 	background-color: #454545;
 	display: flex;
 	margin-top: 8px;
 }
-tr > :nth-child(1){
+.price-main tr > :nth-child(1){
 	color: white;
 	font-size: 90%;
 }
-tr > :nth-child(2){
+.price-main tr > :nth-child(2){
 	color: #69b4ff;
 	font-size: 16px;
 }
-td{
+.price-main td{
 	padding: 4px;
 }
-.download{
+.price-download{
 	width: 876px;
 	background-color: black;
 }
-.download p{
+.price-download p{
 	color: white;
 	font-size: 24px;
 	font-weight: 700;
 	margin-top: 24px;
 	margin-left: 24px;
 }
-.download div{
+.price-download div{
 	width: 90px;
 	height: 30px;
 	background-color: #006fff;
@@ -157,14 +119,4 @@ td{
 	margin-top: 48px;
 	margin-left: 24px;
 	margin-bottom: 24px;
-}
-
-footer{
-	width: 100%;
-	height: 60px;
-	background-color: #050B17;
-	color: white;
-	font-size: 15px;
-	text-align: center;
-	line-height: 60px;
 }

@@ -1,7 +1,7 @@
 import axios from "axios"
 import React, { useState } from "react"
 import { Link } from "react-router-dom"
-import '../css/-reset.css'
+import '../css/reset.css';
 import '../css/SignIn.css'
 import b from '../img/b.png'
 import player from '../img/player.jpg'

@@ -8,10 +8,13 @@ import Signin from './Logout/component/SigIn';
 import Signup from './Logout/component/SignUp';
 import Post from './Login/component/Post';
 import Modify from './Login/component/Modify';
+import Price from './Login/component/Price';
+import Free from './Login/component/Free';
 
-//header, main, footer
+//header, main, footer, pay
 import Guest from './Logout/component/Guest';
 import User from './Login/component/User';
+import Pay from './Login/component/Pay';
 
 function App() {
 	
@@ -20,6 +23,7 @@ function App() {
 		<Routes>
 			<Route path='/aa' element={<Guest/>}/>
 			<Route path='/bb' element={<User/>}/>
+			<Route path='/pay' element={<Pay/>}/>
 			<Route path='/' element={<Mainpage/>}/>
 			<Route path='/signup' element={<Signup/>}/>
 			<Route path='/signin' element={<Signin/>}/>
@@ -28,6 +32,8 @@ function App() {
 			<Route path='/write' element={<Write/>}/>
 			<Route path='/post/:uid' element={<Post/>}/>
 			<Route path='/modify/:uid' element={<Modify/>}/>
+			<Route path='/price' element={<Price/>}/>
+			<Route path='/free' element={<Free/>}/>
 		</Routes>
 	</>
 	)

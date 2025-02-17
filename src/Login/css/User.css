@@ -92,6 +92,7 @@ main{
 	background-color: #006fff;
 	border-radius: 16px;
 	color: white;
+	text-decoration: none;
 	display: flex;
 	align-items: center;
 	justify-content: center;

@@ -1,9 +1,9 @@
 import axios from "axios";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactQuill from 'react-quill-new';
 import 'react-quill-new/dist/quill.snow.css';
 import { Link } from "react-router-dom";
-import '../css/-reset.css';
+import '../css/reset.css';
 import '../css/Write.css';
 import b from '../img/b.png';
 import out from '../img/logout.png';
@@ -19,7 +19,6 @@ const Write = () => {
 		title:undefined,
 		content:undefined
 	});
-	const contentRef = useRef(null); // useRef로 content 상태 추적
 
 	useEffect(() =>{
 		axios.get('http://localhost:8080/api/info', { withCredentials: true })
@@ -86,10 +85,10 @@ const Write = () => {
 					<p>{loginData.nickname}</p>
 					<p>Member Since : {loginData.signupDate}</p>
 					<div className="my-page">My Page</div>
-					<div className="logout">
+					<Link to='/signin' className="logout">
 						<img src={out}></img>
 						<p>Log Out</p>
-					</div>
+					</Link>
 				</div>}
 				<div className="write-container">
 					<p>글 작성</p>

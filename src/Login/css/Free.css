@@ -1,51 +1,4 @@
-.loginHeader{
-	width: 100%;
-	height: 100px;
-	background-color: #050B17;
-	display: flex;
-	justify-content: space-between;
-}
-.site{
-	width: 117px;
-	height: 50px;
-	display: flex;
-	margin-top: 25px;
-	margin-left: 32px;
-}
-.site img{
-	width: 50px;
-	height: 50px;
-}
-.site p{
-	color: white;
-	font-size: 30px;
-	font-weight: 700;
-	margin-top: 7px;
-}
-.category{
-	width: 476px;
-	height: 36px;
-	display: flex;
-	justify-content: space-between;
-	margin-top: 32px;
-}
-
-.imgbtn{
-	width: 48px;
-	height: 48px;
-	margin-top: 26px;
-	margin-right: 32px;
-	cursor: pointer;
-}
-
-main{
-	min-height: calc(100vh - 160px);
-	background-color: #050B17;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-.container{
+.free-container{
 	width: 940px;
 	min-height: calc(100vh - 280px);
 	background-color: #050B17;
@@ -56,11 +9,11 @@ main{
 	align-items: center;
 	gap: 8px;
 }
-.container > :nth-child(1){
+.free-container > :nth-child(1){
 	width: 876px;
 	height: 276px;
 }
-.photoZone{
+.free-photo{
 	width: 876px;
 	height: 494px;
 	background-color: black;
@@ -68,32 +21,32 @@ main{
 	flex-direction: column;
 	align-items: center;
 }
-.screen{
+.free-expand{
 	width: 558px;
 	height: 347px;
 	margin-top: 32px;
 }
-.expand{
+.free-expand img{
 	width: 558px;
 	height: 315px;
 }
-.photo{
+.free-default{
 	display: flex;
 	gap: 20px;
 }
-.photo img{
+.free-default img{
 width: 204px;
 height: 115px;
 cursor: pointer;
 }
-.description{
+.free-description{
 	width: 876px;
 	background-color: black;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
-.write{
+.free-post{
 	max-width: calc(100% - 48px);
 	display: flex;
 	flex-direction: column;
@@ -101,49 +54,59 @@ cursor: pointer;
 	padding-top: 32px;
 	padding-bottom: 32px;
 }
-.write p{
+.free-post p{
 	color: white;
 	font-size: 16px;
 	font-weight: 300;
 	padding: 16px;
 }
-.attention, .warning, .foreword, .description2, .faq{
+strong{
+	font-weight: 700;
+}
+.free-attention, .free-warning, .free-foreword, .free-description2, .free-faq{
 	width: 828px;
 	border: 1px solid white;
 	box-sizing: border-box;
 	display: flex;
 	flex-direction: column;
 }
-.information div{
+.free-information p{
+	display: inline-block;
+	padding: 0px;
+	color: #006fff;
+	text-decoration: underline;
+	cursor: pointer;
+}
+.free-information div{
 	width: 560px;
 	height: 400px;
 	background-color: #454545;
 	display: flex;
 	margin-top: 8px;
 }
-tr > :nth-child(1){
+.free-main tr > :nth-child(1){
 	color: white;
 	font-size: 90%;
 }
-tr > :nth-child(2){
+.free-main tr > :nth-child(2){
 	color: #69b4ff;
 	font-size: 16px;
 }
-td{
+.free-main td{
 	padding: 4px;
 }
-.download{
+.free-download{
 	width: 876px;
 	background-color: black;
 }
-.download p{
+.free-download p{
 	color: white;
 	font-size: 24px;
 	font-weight: 700;
 	margin-top: 24px;
 	margin-left: 24px;
 }
-.download div{
+.free-download div{
 	width: 90px;
 	height: 30px;
 	background-color: #006fff;
@@ -155,14 +118,4 @@ td{
 	margin-top: 48px;
 	margin-left: 24px;
 	margin-bottom: 24px;
-}
-
-footer{
-	width: 100%;
-	height: 60px;
-	background-color: #050B17;
-	color: white;
-	font-size: 15px;
-	text-align: center;
-	line-height: 60px;
 }

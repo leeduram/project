@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import '../css/-reset.css';
+import '../css/reset.css';
 import '../css/Home.css';
 import ad1 from '../img/ad1.png';
 import ad2 from '../img/ad2.png';
@@ -31,11 +31,11 @@ const Home = () => {
 		})
 	},[])
 
-	const portal1 = () => {
-		navi('/gamepost1')
+	const naviPrice = () => {
+		navi('/price')
 	}
-	const portal2 = () => {
-		navi('/gamepost2')
+	const naviFree = () => {
+		navi('/free')
 	}
 	const handleClick=() => {
 		setProfileOpen(!profileOpen)
@@ -62,10 +62,10 @@ const Home = () => {
 					<p>{loginData.nickname}</p>
 					<p>Member Since : {loginData.signupDate}</p>
 					<div className="my-page">My Page</div>
-					<div className="logout">
+					<Link to='/signin' className="logout">
 						<img src={out}></img>
 						<p>Log Out</p>
-					</div>
+					</Link>
 				</div>}
 				<div className="home-ad">
 					<iframe 
@@ -84,14 +84,14 @@ const Home = () => {
 							<img src={ad2} alt="ingame2"></img>								<img src={ad3} alt="ingame3"></img>
 						</div>
 						<p>#Simulation</p>
-						<Link to='/gamepost2'>PLAY!</Link>
+						<Link to='/free'>PLAY!</Link>
 					</div>
 				</div>
 				<div className="home-library">
 					<div className="home-latest">
 						<p>Latest Featured Games</p>
 						<div className="home-game">
-							<div onClick={portal1} style={{cursor:'pointer'}}>
+							<div onClick={naviPrice} style={{cursor:'pointer'}}>
 								<img src={rog1} alt="thumbnail"></img>
 								<p>Die in the Dungeon</p>
 								<p>#Roguelike</p>
@@ -126,7 +126,7 @@ const Home = () => {
 								<p>#Simulation</p>
 								<p>Construct the mightiest wizard tower!</p>
 							</div>
-							<div onClick={portal2} style={{cursor:'pointer'}}>
+							<div onClick={naviFree} style={{cursor:'pointer'}}>
 								<img src={sim3} alt="thumbnail"></img>
 								<p>"Voices Of The Void" </p>
 								<p>#Simulation</p>
@@ -137,7 +137,7 @@ const Home = () => {
 					<div className="home-roguelike">
 						<p>Roguelike</p>
 						<div className="home-game">
-							<div onClick={portal1} style={{cursor:'pointer'}}>
+							<div onClick={naviPrice} style={{cursor:'pointer'}}>
 								<img src={rog1} alt="thumbnail"></img>
 								<p>Die in the Dungeon</p>
 								<p>#Roguelike</p>

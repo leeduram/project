@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import '../css/-reset.css';
+import '../css/reset.css';
 import '../css/User.css';
 import b from '../img/b.png';
 import out from '../img/logout.png';
@@ -45,10 +45,10 @@ const User = () => {
 					<p>{loginData.nickname}</p>
 					<p>Member Since : {loginData.signupDate}</p>
 					<div className="my-page">My Page</div>
-					<div className="logout">
+					<Link to='/signin' className="logout">
 						<img src={out}></img>
 						<p>Log Out</p>
-					</div>
+					</Link>
 				</div>}
 			</main>
 			<footer>Copyright © 2025 bZip</footer>
