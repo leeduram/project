@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import '../css/Free.css';
 import '../css/reset.css';
 import b from '../img/b.png';
-import cpay from '../img/credit_card.png';
 import kpay from '../img/kakao.png';
 import out from '../img/logout.png';
 import user from '../img/user.png';
@@ -17,6 +16,7 @@ import vovmini4 from '../img/vovmini4.png';
 const Free = () => {
 	const [profileOpen,setProfileOpen] = useState(false);
 	const [loginData,setLoginData] = useState({
+		uid:null,
 		email:'',
 		nickname:'',
 		signupDate:''
@@ -61,18 +61,12 @@ const Free = () => {
 	const handleClickPayOpen = () => {
 		setPayOpen(!payOpen)
 	}
-	const handleChangeAmount = (e) => {
-		setAmount(e.target.value)
-	}
-	const handleSelectMethodo = (method) => {
-		setPayMethod(method);
-	};
 	const handlePay = () => {
 		if (!amount || isNaN(amount) || amount <= 0) {
 			alert("올바른 금액을 입력해주세요.")
 			return;
 		}
-
+		
 		const IMP = window.IMP;
 		if (payMethod === 'kakao') {
 			IMP.request_pay({
@@ -92,8 +86,8 @@ const Free = () => {
 					axios.post('http://localhost:8080/api/payment',{
 						amount: Number(amount),
 						method: payMethod,
-						userId: loginData.email
-					}).then(() => {
+						userUid: loginData.uid
+					}, { withCredentials: true }).then(() => {
 						alert('결제가 완료되었습니다.')
 					});
 				} else {
@@ -106,7 +100,27 @@ const Free = () => {
 		setPayMethod('kakao')
 		handlePay();
 	}
-
+	const handleDownload = () => {
+		const downloadLink = 'https://github.com/leeduram/project/releases/download/download/vovmain.png';
+		window.location.href = downloadLink;
+	};
+	const handleChangeAmount = (e) => {
+		setAmount(e.target.value);
+	}
+	const handleBlurAmount = () => {
+		let value = Number(amount);
+		if (value % 100 !== 0) {
+			value = Math.floor(value / 100) * 100;
+			setAmount(value);
+		}
+	}
+	const handleSetFalse = (e) => {
+		if (e.target === e.currentTarget) {
+			setProfileOpen(false);
+			setPayOpen(false);
+		}
+	}
+	
 	return(
 		<>
 			<header className="user-header">
@@ -121,7 +135,7 @@ const Free = () => {
 				</div>
 				<img src={user} alt="profile" onClick={handleClick}></img>
 			</header>
-			<main className="free-main">
+			<main className="free-main" onClick={handleSetFalse}>
 				{profileOpen && <div className="profile-box">
 					<img src={user}/>
 					<p>{loginData.nickname}</p>
@@ -132,7 +146,7 @@ const Free = () => {
 						<p>Log Out</p>
 					</Link>
 				</div>}
-				<div className="free-container">
+				<div className="free-container" onClick={handleSetFalse}>
 					<img src={vovmain} alt="mainscreen"></img>
 					<div className="free-photo">
 						<div className="free-expand">
@@ -230,30 +244,34 @@ const Free = () => {
 							</div>
 						</div>
 					</div>
-					<div className="free-download" onClick={handleClickPayOpen}>
+					<div className="free-download">
 						<p>Download</p>
-						<div>Download</div>
+						<div onClick={handleClickPayOpen}>Download</div>
 					</div>
-					{payOpen && <div className="pay-container">
-						<div className="pay-title">
+					{payOpen && <div className="free-pay">
+						<div className="free-title">
 							<p>Download</p>
-							<p>x</p>
+							<button onClick={handleClickPayOpen}>x</button>
 						</div>
-						<div className="pay-payment">
+						<div className="free-payment">
 							<p>이 게임은 무료입니다. 하지만 적당하다고 생각하시는 가격을 결제하여 
 							개발자에게 후원을 할 수 있습니다.</p>
-							<p>아니오, 게임만 다운로드 받겠습니다.</p>
+							<p onClick={handleDownload}>아니오, 게임만 다운로드 받겠습니다.</p>
 							<p>결제 금액</p>
-							<input type="number" name="amount" value={amount}
-							onChange={handleChangeAmount} placeholder="금액을 입력하세요."></input>
+							<input 
+							type="number" 
+							name="amount" 
+							value={amount}
+							onChange={handleChangeAmount} 
+							onBlur={handleBlurAmount}
+							placeholder="금액을 입력하세요."
+							min="100"
+							step="100"
+							/>
 							<p>결제 수단</p>
-							<div className="pay-btn">
-                                <div className="pay-kakao" onClick={() => handleSelectKakao()}>
+							<div className="free-btn">
+                                <div className="free-kakao" onClick={() => handleSelectKakao()}>
                                     <img src={kpay} alt="pay"></img>
-                                </div>
-                                <div className="pay-card">
-                                    <img src={cpay} alt="card"></img>
-                                    <p>카드 결제</p>
                                 </div>
                             </div>
 						</div>

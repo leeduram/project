@@ -14,7 +14,6 @@ import Free from './Login/component/Free';
 //header, main, footer, pay
 import Guest from './Logout/component/Guest';
 import User from './Login/component/User';
-import Pay from './Login/component/Pay';
 
 function App() {
 	
@@ -23,7 +22,6 @@ function App() {
 		<Routes>
 			<Route path='/aa' element={<Guest/>}/>
 			<Route path='/bb' element={<User/>}/>
-			<Route path='/pay' element={<Pay/>}/>
 			<Route path='/' element={<Mainpage/>}/>
 			<Route path='/signup' element={<Signup/>}/>
 			<Route path='/signin' element={<Signin/>}/>
