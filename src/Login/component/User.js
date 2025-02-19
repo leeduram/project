@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import '../css/reset.css';
 import '../css/User.css';
 import b from '../img/b.png';
@@ -13,6 +13,7 @@ const User = () => {
 		nickname:'',
 		signupDate:''
 	})
+	const navigate = useNavigate();
 
 	useEffect(() =>{
 		axios.get('http://localhost:8080/api/info', { withCredentials: true })
@@ -23,6 +24,12 @@ const User = () => {
 
 	const handleClick=() => {
 		setProfileOpen(!profileOpen)
+	}
+	const handleLogout = () => {
+		axios.post('http://localhost:8080/api/logout', null, { withCredentials: true })
+		.then(()=> {
+			navigate('/signin');
+		})
 	}
 
 	return(
@@ -45,10 +52,10 @@ const User = () => {
 					<p>{loginData.nickname}</p>
 					<p>Member Since : {loginData.signupDate}</p>
 					<div className="my-page">My Page</div>
-					<Link to='/signin' className="logout">
+					<div className="logout" onClick={handleLogout}>
 						<img src={out}></img>
 						<p>Log Out</p>
-					</Link>
+					</div>
 				</div>}
 			</main>
 			<footer>Copyright © 2025 bZip</footer>

@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import '../css/Price.css';
 import '../css/reset.css';
 import b from '../img/b.png';
@@ -21,6 +21,7 @@ const Price = () => {
 		nickname:'',
 		signupDate:''
 	})
+	const navigate = useNavigate();
 	const [expand,setExpand] = useState('ditdmini1');
 	const [showInfo,setShowInfo] = useState(false);
 	const [payOpen,setPayOpen] = useState(false);
@@ -34,7 +35,8 @@ const Price = () => {
 	const [keyData,setKeyData] = useState({
 		userUid:'',
 		gameUid:'',
-		method:''
+		method:'',
+		purchaseDate: null
 	})
 
 	useEffect(() =>{
@@ -59,10 +61,16 @@ const Price = () => {
 		}
 	},[])
 
-	const handleClick=() => {
+	const handleClick = () => {
 		setProfileOpen(!profileOpen)
 	}
-	const handleClickExpand= (image) => {
+	const handleLogout = () => {
+		axios.post('http://localhost:8080/api/logout', null, { withCredentials: true })
+		.then(()=> {
+			navigate('/signin');
+		})
+	}
+	const handleClickExpand = (image) => {
 		setExpand(image)
 	}
 	const handleClickShowInfo = () => {
@@ -116,15 +124,18 @@ const Price = () => {
 		handlePay();
 	}
 	const handelDonate = () => {
-		axios.post('http://localhost:8080/api/donate', { withCredentials: true })
+		axios.post('http://localhost:8080/api/donate',null, { withCredentials: true })
 		.then((resp) => {
 			setKeyData(resp.data);
-		})
+			console.log(keyData)
+		}).catch((error) => {
+			alert('후원 내역을 가져오는 데 실패했습니다.');
+			console.error(error);
+		});
 	}
 	const handleDownload = () => {
 		handelDonate();
-		console.log(keyData)
-		if (keyData != null) {
+		if (keyData !== null) {
 			const downloadLink = 'https://github.com/leeduram/project/releases/download/download/vovmain.png';
 			window.location.href = downloadLink;
 		}
@@ -166,10 +177,10 @@ const Price = () => {
 					<p>{loginData.nickname}</p>
 					<p>Member Since : {loginData.signupDate}</p>
 					<div className="my-page">My Page</div>
-					<Link to='/signin' className="logout">
+					<div className="logout" onClick={handleLogout}>
 						<img src={out}></img>
 						<p>Log Out</p>
-					</Link>
+					</div>
 				</div>}
 				<div className="price-container" onClick={handleSetFalse}>
 					<img src={ditdmain} alt="mainscreen"></img>
@@ -286,6 +297,7 @@ const Price = () => {
                             </div>
 						</div>
 					</div>}
+					<button onClick={handelDonate}/>
 				</div>
 			</main>
 			<footer>Copyright © 2025 bZip</footer>
