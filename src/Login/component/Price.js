@@ -1,31 +1,62 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import '../css/reset.css';
 import '../css/Price.css';
+import '../css/reset.css';
 import b from '../img/b.png';
 import ditdmain from '../img/ditdmain.png';
 import ditdmini1 from '../img/ditdmini1.png';
 import ditdmini2 from '../img/ditdmini2.png';
 import ditdmini3 from '../img/ditdmini3.png';
 import ditdmini4 from '../img/ditdmini4.png';
+import kpay from '../img/kakao.png';
 import out from '../img/logout.png';
 import user from '../img/user.png';
 
 const Price = () => {
 	const [profileOpen,setProfileOpen] = useState(false);
 	const [loginData,setLoginData] = useState({
+		uid:null,
+		email:'',
 		nickname:'',
 		signupDate:''
 	})
 	const [expand,setExpand] = useState('ditdmini1');
 	const [showInfo,setShowInfo] = useState(false);
+	const [payOpen,setPayOpen] = useState(false);
+	const [amount,setAmount] = useState('');
+	const [payMethod,setPayMethod] = useState('');
+	const [gameData,setGameData] = useState({
+		uid:2,
+		name:'Die in the Dungeon',
+		amount:10000
+	})
+	const [keyData,setKeyData] = useState({
+		userUid:'',
+		gameUid:'',
+		method:''
+	})
 
 	useEffect(() =>{
 		axios.get('http://localhost:8080/api/info', { withCredentials: true })
 		.then((resp) => {
 			setLoginData(resp.data)
 		})
+	},[])
+	useEffect(() => {
+		const script = document.createElement("script");
+		script.src = "https://cdn.iamport.kr/v1/iamport.js";
+		script.async = true;
+		document.head.appendChild(script);
+
+		script.onload = () => {
+			const IMP = window.IMP;
+			IMP.init('imp18800044')
+		}
+
+		return () => {
+			document.head.removeChild(script);
+		}
 	},[])
 
 	const handleClick=() => {
@@ -36,7 +67,84 @@ const Price = () => {
 	}
 	const handleClickShowInfo = () => {
 		setShowInfo(!showInfo)
-}
+	}
+	const handleClickPayOpen = () => {
+		setPayOpen(!payOpen)
+	}
+	const handlePay = () => {
+		if (!amount || isNaN(amount) || amount <= 9999) {
+			alert("올바른 금액을 입력해주세요.")
+			return;
+		}
+		
+		const IMP = window.IMP;
+		if (payMethod === 'kakao') {
+			IMP.request_pay({
+				pg:"kakaopay",
+				pay_method:"card",
+				merchant_uid:`order_${new Date().getTime()}`,
+				name:"인디 게임 개발자 후원",
+				amount:Number(amount),
+				buyer_name:loginData.nickname,
+				buyer_email:loginData.email,
+				buyer_tel:"01012345678",
+				buyer_addr:"서울시 강동구",
+				buyer_postcome:"123-456"
+			}, function (rsp) {
+				if (rsp.success) {
+					alert('결제 성공')
+					axios.post('http://localhost:8080/api/key',{
+						method: payMethod,
+						user: {
+							uid: loginData.uid
+						},
+						game: {
+							uid: gameData.uid
+						}
+					}, { withCredentials: true })
+					.then(() => {
+						alert('결제가 완료되었습니다.')
+					});
+				} else {
+					alert(`결제 실패: ${rsp.error_msg}`)
+				}
+			})
+		}
+	}
+	const handleSelectKakao = () => {
+		setPayMethod('kakao')
+		handlePay();
+	}
+	const handelDonate = () => {
+		axios.post('http://localhost:8080/api/donate', { withCredentials: true })
+		.then((resp) => {
+			setKeyData(resp.data);
+		})
+	}
+	const handleDownload = () => {
+		handelDonate();
+		console.log(keyData)
+		if (keyData != null) {
+			const downloadLink = 'https://github.com/leeduram/project/releases/download/download/vovmain.png';
+			window.location.href = downloadLink;
+		}
+	};
+	const handleChangeAmount = (e) => {
+		setAmount(e.target.value);
+	}
+	const handleBlurAmount = () => {
+		let value = Number(amount);
+		if (value % 100 !== 0) {
+			value = Math.floor(value / 100) * 100;
+			setAmount(value);
+		}
+	}
+	const handleSetFalse = (e) => {
+		if (e.target === e.currentTarget) {
+			setProfileOpen(false);
+			setPayOpen(false);
+		}
+	}
 
 	return(
 		<>
@@ -52,7 +160,7 @@ const Price = () => {
 				</div>
 				<img src={user} alt="profile" onClick={handleClick}></img>
 			</header>
-			<main className="price-main">
+			<main className="price-main" onClick={handleSetFalse}>
 				{profileOpen && <div className="profile-box">
 					<img src={user}/>
 					<p>{loginData.nickname}</p>
@@ -63,7 +171,7 @@ const Price = () => {
 						<p>Log Out</p>
 					</Link>
 				</div>}
-				<div className="price-container">
+				<div className="price-container" onClick={handleSetFalse}>
 					<img src={ditdmain} alt="mainscreen"></img>
 					<div className="price-photo">
 						<div className="price-expand">
@@ -148,8 +256,36 @@ const Price = () => {
 					</div>
 					<div className="price-download">
 						<p>Download</p>
-						<div>Download</div>
+						<div onClick={handleClickPayOpen}>Download</div>
 					</div>
+					{payOpen && <div className="price-pay">
+						<div className="price-title">
+							<p>Download</p>
+							<button onClick={handleClickPayOpen}>x</button>
+						</div>
+						<div className="price-payment">
+							<p>이 게임 컬렉션을 <strong>10,000원</strong> 이상 구매하시면 다운로드하실 수 있습니다. 
+							구매 시 Steam 키를 받게 됩니다.</p>
+							<p onClick={handleDownload}>다운로드</p>
+							<p>결제 금액</p>
+							<input 
+							type="number" 
+							name="amount" 
+							value={amount}
+							onChange={handleChangeAmount} 
+							onBlur={handleBlurAmount}
+							placeholder="금액을 입력하세요."
+							min="100"
+							step="100"
+							/>
+							<p>결제 수단</p>
+							<div className="price-btn">
+                                <div className="price-kakao" onClick={() => handleSelectKakao()}>
+                                    <img src={kpay} alt="pay"></img>
+                                </div>
+                            </div>
+						</div>
+					</div>}
 				</div>
 			</main>
 			<footer>Copyright © 2025 bZip</footer>

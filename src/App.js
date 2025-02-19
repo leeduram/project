@@ -11,7 +11,7 @@ import Modify from './Login/component/Modify';
 import Price from './Login/component/Price';
 import Free from './Login/component/Free';
 
-//header, main, footer, pay
+//header, main, footer
 import Guest from './Logout/component/Guest';
 import User from './Login/component/User';
 
