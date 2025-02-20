@@ -140,22 +140,26 @@ const Price = () => {
 			setAmount(value);
 		}
 	}
-	const handelDonate = () => {
-		axios.post('http://localhost:8080/api/donate',null, { withCredentials: true })
-		.then((resp) => {
-			setKeyData(resp.data);
-		}).catch((error) => {
-			alert('후원 내역을 가져오는 데 실패했습니다.');
-			console.error(error);
-		});
-	}
-	const handleDownload = () => {
-		handelDonate();
-		if (keyData && keyData.method) {
-			const downloadLink = 'https://github.com/leeduram/project/releases/download/download/vovmain.png';
-			window.location.href = downloadLink;
-		} else {
-			alert('후원 내역이 없습니다.\n이 게임은 후원을 하신 이후에 다운로드가 가능합니다.')
+	const handelDonate = async () => {
+		try {
+		  const response = await axios.post('http://localhost:8080/api/donate', null, { withCredentials: true });
+		  setKeyData(response.data);
+		  return response.data;
+		} catch (error) {
+		  throw new Error('후원 내역을 가져오는 데 실패했습니다.');
+		}
+	  };
+	const handleDownload = async () => {
+		try {
+			const response = await handelDonate();
+			if (response && response.method) {
+				const downloadLink = 'https://github.com/leeduram/project/releases/download/download/vovmain.png';
+				window.location.href = downloadLink;
+			} else {
+				alert('후원 내역이 없습니다.\n이 게임은 후원을 하신 이후에 다운로드가 가능합니다.')
+			}
+		} catch {
+			alert('후원 내역을 가져오는 데 실패했습니다.')
 		}
 	};
 

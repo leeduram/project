@@ -54,6 +54,13 @@ const Post = () => {
 			setProfileOpen(false);
 		}
 	}
+	const handleClickModify = () => {
+		if (loginData.nickname !== postData.nickname) {
+			alert('본인 글만 수정할 수 있습니다.')
+			return;
+		}
+		navi(`/modify/${postData.uid}`)
+	}
 	const handleClickDelete = () => {
 		const confirmDelete = window.confirm("삭제하시겠습니까?");
 		if (confirmDelete) {
@@ -63,7 +70,7 @@ const Post = () => {
 				alert("삭제되었습니다.");
 				navi('/board');
 			}).catch(() => {
-				alert("작성자만 삭제할 수 있습니다.")
+				alert("본인 글만 삭제할 수 있습니다.")
 			})
 		}
 	}
@@ -108,7 +115,7 @@ const Post = () => {
                     </div>
                     <div className="post-flex">
                         <div className="post-btn">
-                            <Link to={`/modify/${postData.uid}`}>수정</Link>
+							<div onClick={handleClickModify}>수정</div>
                             <div onClick={handleClickDelete}>삭제</div>
                             <Link to='/board'>취소</Link>
                         </div>

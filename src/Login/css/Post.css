@@ -56,17 +56,11 @@
 .post-btn div{
     width: 80px;
     height: 30px;
-    text-align: center;
-    line-height: 30px;
-}
-.post-btn > :nth-child(1){
-    background-color: black;
-    color: white;
-}
-.post-btn > :nth-child(2){
     background-color: black;
     color: white;
     cursor: pointer;
+    text-align: center;
+    line-height: 30px;
 }
 .post-btn a{
     width: 80px;
