@@ -10,6 +10,7 @@ import Post from './Login/component/Post';
 import Modify from './Login/component/Modify';
 import Price from './Login/component/Price';
 import Free from './Login/component/Free';
+import Upload from './Login/component/Upload';
 
 //header, main, footer
 import Guest from './Logout/component/Guest';
@@ -32,6 +33,7 @@ function App() {
 			<Route path='/modify/:uid' element={<Modify/>}/>
 			<Route path='/price' element={<Price/>}/>
 			<Route path='/free' element={<Free/>}/>
+			<Route path='/upload' element={<Upload/>}/>
 		</Routes>
 	</>
 	)

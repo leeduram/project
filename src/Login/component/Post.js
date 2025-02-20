@@ -13,6 +13,7 @@ const Post = () => {
 		nickname:'',
 		signupDate:''
 	})
+	const navigate = useNavigate();
 	const [postData,setPostData] = useState({
 		uid:null,
 		title:'',
@@ -42,6 +43,17 @@ const Post = () => {
 	const handleClick=() => {
 		setProfileOpen(!profileOpen)
 	}
+	const handleLogout = () => {
+		axios.post('http://localhost:8080/api/logout', null, { withCredentials: true })
+		.then(() => {
+			navigate('/signin');
+		})
+	}
+	const handleSetFalse = (e) => {
+		if (e.target === e.currentTarget) {
+			setProfileOpen(false);
+		}
+	}
 	const handleClickDelete = () => {
 		const confirmDelete = window.confirm("삭제하시겠습니까?");
 		if (confirmDelete) {
@@ -50,6 +62,8 @@ const Post = () => {
 			}).then(() => {
 				alert("삭제되었습니다.");
 				navi('/board');
+			}).catch(() => {
+				alert("작성자만 삭제할 수 있습니다.")
 			})
 		}
 	}
@@ -63,23 +77,23 @@ const Post = () => {
 				</div>
 				<div className="user-category">
 					<Link to='/home'>Home</Link>
-					<Link to='/fix'>Upload</Link>
+					<Link to='/upload'>Upload</Link>
 					<Link to='/board'>Community</Link>
 				</div>
 				<img src={user} alt="profile" onClick={handleClick}></img>
 			</header>
-			<main className="post-main">
+			<main className="post-main" onClick={handleSetFalse}>
 				{profileOpen && <div className="profile-box">
 					<img src={user}/>
 					<p>{loginData.nickname}</p>
 					<p>Member Since : {loginData.signupDate}</p>
 					<div className="my-page">My Page</div>
-					<Link to='/signin' className="logout">
+					<div className="logout" onClick={handleLogout}>
 						<img src={out}></img>
 						<p>Log Out</p>
-					</Link>
+					</div>
 				</div>}
-                <div className="post-container">
+                <div className="post-container" onClick={handleSetFalse}>
                     <div>
                         <div className="post-title">
                             <p>{postData.title}</p>
@@ -89,7 +103,7 @@ const Post = () => {
                             </div>
                         </div>
                         <div className="post-content">
-                            <p>{postData.content}</p>
+                            <div dangerouslySetInnerHTML={{ __html: postData.content }}/>
 						</div>
                     </div>
                     <div className="post-flex">

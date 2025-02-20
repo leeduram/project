@@ -1,73 +1,95 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import b from '../proimg/b.png';
-import user from '../proimg/user.png';
-import './reset.css'
-import styles from './Upload.module.css'
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import '../css/reset.css';
+import '../css/Upload.css';
+import b from '../img/b.png';
+import out from '../img/logout.png';
+import user from '../img/user.png';
 
 const Upload = () => {
-	const handleClick=() => {
-		alert("유저 관련 툴 만들기 or figma 따라가기")
+	const [profileOpen,setProfileOpen] = useState(false);
+	const [loginData,setLoginData] = useState({
+		nickname:'',
+		signupDate:''
+	})
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		axios.get('http://localhost:8080/api/info', { withCredentials: true })
+		.then((resp) => {
+			setLoginData(resp.data)
+		})
+	},[])
+
+	const handleClick = () => {
+		setProfileOpen(!profileOpen)
+	}
+	const handleLogout = () => {
+		axios.post('http://localhost:8080/api/logout', null, { withCredentials: true })
+		.then(() => {
+			navigate('/signin');
+		})
+	}
+	const handleSetFalse = (e) => {
+		if (e.target === e.currentTarget) {
+			setProfileOpen(false);
+		}
 	}
 
 	return(
 		<>
-			<header className={styles.loginHeader}>
-				<div className={styles.site}>
+			<header className="user-header">
+				<div className="user-logo">
 					<img src={b} alt="logo"></img>
 					<p>bZip</p>
 				</div>
-				<div className={styles.category}>
-					<Link to='/home' style={{
-						color:"white",
-						fontSize:"30px",
-						fontWeight:"400",
-						textDecoration:"none"
-					}}>Home</Link>
-						<Link to='/upload' style={{
-						color:"white",
-						fontSize:"30px",
-						fontWeight:"400",
-						textDecoration:"none"
-					}}>Upload</Link>
-					<Link to='/community1' style={{
-						color:"white",
-						fontSize:"30px",
-						fontWeight:"400",
-						textDecoration:"none"
-					}}>Community</Link>
+				<div className="user-category">
+					<Link to='/home'>Home</Link>
+					<Link to='/upload'>Upload</Link>
+					<Link to='/board'>Community</Link>
 				</div>
-				<img src={user} alt="profile" className={styles.imgbtn} onClick={handleClick}></img>
+				<img src={user} alt="profile" onClick={handleClick}></img>
 			</header>
-			<main>
-				<div className={styles.container}>
-					<div className={styles.create}>Create A New Game</div>
-					<div className={styles.content}>
-						<div className={styles.title}>
+			<main className="upload-main" onClick={handleSetFalse}>
+				{profileOpen && <div className="profile-box">
+					<img src={user}/>
+					<p>{loginData.nickname}</p>
+					<p>Member Since : {loginData.signupDate}</p>
+					<div className="my-page">My Page</div>
+					<div className="logout" onClick={handleLogout}>
+						<img src={out}></img>
+						<p>Log Out</p>
+					</div>
+				</div>}
+				<div className="upload-container" onClick={handleSetFalse}>
+					<div>Create A New Game</div>
+					<div>
+						<div className="upload-title">
 							<p>Title</p>
 							<input></input>
 						</div>
-						<div className={styles.url}>
+						<div className="upload-url">
 							<p>URL</p>
 							<input></input>
 						</div>
-						<div className={styles.price}>
+						<div className="upload-price">
 							<p>Price</p>
 							<input type="number" name="setPrice"></input>
 						</div>
-						<div className={styles.ubox}>
+						<div className="upload-upload">
 							<p>Upload</p>
 							<div>Add File</div>
 						</div>
-						<div className={styles.desc}>
-							<p type="text" name="description">Description</p>
-							<input></input>
+						<div className="upload-description">
+							<p>Description</p>
+							<div></div>
 						</div>
-						<div className={styles.tag}>
+						<div className="upload-tag">
 							<p>Tag</p>
 							<input></input>
 						</div>
-						<div className={styles.btn}>
+						<div className="upload-btn">
 							<div>Create</div>
 						</div>
 					</div>

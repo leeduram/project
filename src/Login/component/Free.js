@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import '../css/Free.css';
 import '../css/reset.css';
 import b from '../img/b.png';
@@ -21,11 +21,17 @@ const Free = () => {
 		nickname:'',
 		signupDate:''
 	})
+	const navigate = useNavigate();
 	const [expand,setExpand] = useState('vovmini1')
 	const [showInfo,setShowInfo] = useState(false)
 	const [payOpen,setPayOpen] = useState(false);
 	const [amount,setAmount] = useState('');
 	const [payMethod,setPayMethod] = useState('');
+		const [gameData,setGameData] = useState({
+			uid:1,
+			name:'Voices Of The Void',
+			amount:0
+		})
 
 	useEffect(() =>{
 		axios.get('http://localhost:8080/api/info', { withCredentials: true })
@@ -51,6 +57,18 @@ const Free = () => {
 
 	const handleClick=() => {
 		setProfileOpen(!profileOpen)
+	}
+	const handleLogout = () => {
+		axios.post('http://localhost:8080/api/logout', null, { withCredentials: true })
+		.then(() => {
+			navigate('/signin');
+		})
+	}
+	const handleSetFalse = (e) => {
+		if (e.target === e.currentTarget) {
+			setProfileOpen(false);
+			setPayOpen(false);
+		}
 	}
 	const handleClickExpand = (image) => {
 		setExpand(image)
@@ -82,16 +100,21 @@ const Free = () => {
 				buyer_postcome:"123-456"
 			}, function (rsp) {
 				if (rsp.success) {
-					alert('결제 성공')
-					axios.post('http://localhost:8080/api/payment',{
-						amount: Number(amount),
+					axios.post('http://localhost:8080/api/key',{
 						method: payMethod,
-						userUid: loginData.uid
+						user: {
+							uid: loginData.uid
+						},
+						game: {
+							uid: gameData.uid
+						}
 					}, { withCredentials: true }).then(() => {
 						alert('결제가 완료되었습니다.')
+						setPayOpen(false);
 					});
 				} else {
-					alert(`결제 실패: ${rsp.error_msg}`)
+					alert(`${rsp.error_msg}`)
+					setPayOpen(false);
 				}
 			})
 		}
@@ -100,10 +123,6 @@ const Free = () => {
 		setPayMethod('kakao')
 		handlePay();
 	}
-	const handleDownload = () => {
-		const downloadLink = 'https://github.com/leeduram/project/releases/download/download/vovmain.png';
-		window.location.href = downloadLink;
-	};
 	const handleChangeAmount = (e) => {
 		setAmount(e.target.value);
 	}
@@ -114,13 +133,11 @@ const Free = () => {
 			setAmount(value);
 		}
 	}
-	const handleSetFalse = (e) => {
-		if (e.target === e.currentTarget) {
-			setProfileOpen(false);
-			setPayOpen(false);
-		}
-	}
-	
+	const handleDownload = () => {
+		const downloadLink = 'https://github.com/leeduram/project/releases/download/download/vovmain.png';
+		window.location.href = downloadLink;
+	};
+
 	return(
 		<>
 			<header className="user-header">
@@ -130,7 +147,7 @@ const Free = () => {
 				</div>
 				<div className="user-category">
 					<Link to='/home'>Home</Link>
-					<Link to='/fix'>Upload</Link>
+					<Link to='/upload'>Upload</Link>
 					<Link to='/board'>Community</Link>
 				</div>
 				<img src={user} alt="profile" onClick={handleClick}></img>
@@ -141,12 +158,12 @@ const Free = () => {
 					<p>{loginData.nickname}</p>
 					<p>Member Since : {loginData.signupDate}</p>
 					<div className="my-page">My Page</div>
-					<Link to='/signin' className="logout">
+					<div className="logout" onClick={handleLogout}>
 						<img src={out}></img>
 						<p>Log Out</p>
-					</Link>
+					</div>
 				</div>}
-				<div className="free-container" onClick={handleSetFalse}>
+				<div className="free-container"  onClick={handleSetFalse}>
 					<img src={vovmain} alt="mainscreen"></img>
 					<div className="free-photo">
 						<div className="free-expand">

@@ -22,6 +22,7 @@ const Home = () => {
 		nickname:'',
 		signupDate:''
 	})
+	const navigate = useNavigate();
 	const navi = useNavigate();
 
 	useEffect(() =>{
@@ -40,6 +41,17 @@ const Home = () => {
 	const handleClick=() => {
 		setProfileOpen(!profileOpen)
 	}
+	const handleLogout = () => {
+		axios.post('http://localhost:8080/api/logout', null, { withCredentials: true })
+		.then(() => {
+			navigate('/signin');
+		})
+	}
+	const handleSetFalse = (e) => {
+		if (e.target === e.currentTarget) {
+			setProfileOpen(false);
+		}
+	}
 
 
 	return(
@@ -51,21 +63,21 @@ const Home = () => {
 				</div>
 				<div className="user-category">
 					<Link to='/home'>Home</Link>
-					<Link to='/fix'>Upload</Link>
+					<Link to='/upload'>Upload</Link>
 					<Link to='/board'>Community</Link>
 				</div>
 				<img src={user} alt="profile" onClick={handleClick}></img>
 			</header>
-			<main className="home-main">
+			<main className="home-main" onClick={handleSetFalse}>
 				{profileOpen && <div className="profile-box">
 					<img src={user}/>
 					<p>{loginData.nickname}</p>
 					<p>Member Since : {loginData.signupDate}</p>
 					<div className="my-page">My Page</div>
-					<Link to='/signin' className="logout">
+					<div className="logout" onClick={handleLogout}>
 						<img src={out}></img>
 						<p>Log Out</p>
-					</Link>
+					</div>
 				</div>}
 				<div className="home-ad">
 					<iframe 

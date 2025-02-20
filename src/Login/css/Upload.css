@@ -1,0 +1,77 @@
+.upload-container{
+    width: 610px;
+    min-height: 600px;
+    background-color: white;
+    margin-top: 60px;
+    margin-bottom: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
+}
+.upload-container > div:nth-of-type(1){
+    width: 500px;
+    font-size: 30px;
+    font-weight: 700;
+    margin-top: 60px;
+}
+.upload-container > div:nth-of-type(2){
+	min-height: calc(100vh - 280px);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.upload-title, .upload-url, .upload-price, .upload-description, .upload-tag{
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.upload-upload{
+    width: 500px;
+    height: 58px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.upload-upload div{
+    width: 60px;
+    height: 30px;
+    background-color: #006FFF;
+    color: white;
+    font-size: 12px;
+    text-align: center;
+    line-height: 30px;
+}
+.upload-title p, .upload-url p, .upload-price p, .upload-upload p, .upload-description p, .upload-tag p{
+    font-size: 20px;
+    font-weight: 700;
+}
+.upload-title input, .upload-url input, .upload-price input, .upload-tag input{
+    width: 500px;
+    height: 16px;
+    outline: none;
+    box-sizing: border-box;
+}
+.upload-description div{
+    width: 500px;
+	height: 260px;
+	border: 1px solid black;
+	box-sizing: border-box;
+}
+.upload-btn{
+    width: 500px;
+    height: 30px;
+    display: flex;
+    justify-content: flex-end;
+}
+.upload-btn div{
+    width: 60px;
+    height: 30px;
+    background-color: #006FFF;
+    color: white;
+    font-size: 12px;
+    text-align: center;
+    line-height: 30px;
+    margin-top: 20px;
+}

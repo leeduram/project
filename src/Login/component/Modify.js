@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import ReactQuill from "react-quill-new";
 import 'react-quill-new/dist/quill.snow.css';
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import '../css/reset.css';
 import '../css/Modify.css';
 import b from '../img/b.png';
@@ -15,12 +15,14 @@ const Modify = () => {
 		nickname:'',
 		signupDate:''
 	})
+	const navigate = useNavigate();
 	const [formData,setFormData] = useState({
 		title:undefined,
 		content:undefined
 	});
 	const {uid} = useParams();
 	const changeUid = Number(uid);
+	const navi = useNavigate();
 
 	useEffect(() =>{
 		axios.get('http://localhost:8080/api/info', { withCredentials: true })
@@ -40,6 +42,17 @@ const Modify = () => {
 
 	const handleClick=() => {
 		setProfileOpen(!profileOpen)
+	}
+	const handleLogout = () => {
+		axios.post('http://localhost:8080/api/logout', null, { withCredentials: true })
+		.then(() => {
+			navigate('/signin');
+		})
+	}
+	const handleSetFalse = (e) => {
+		if (e.target === e.currentTarget) {
+			setProfileOpen(false);
+		}
 	}
 	const handleInputChange = (e) => {
 		setFormData({
@@ -61,18 +74,19 @@ const Modify = () => {
 	}
 	const handleClickModify = (e) => {
 		e.preventDefault();
-		const cleanedContent = formData.content.replace(/<\/?[^>]+(>|$)/g, "").trim();
-		if (formData.title == undefined || formData.cleanedContent == ''){
+		if (formData.title == undefined || formData.content == ''){
 			alert("제목과 내용은 필수로 기입하셔야 합니다.\n다시 확인해 주세요.")
 			return
 		}
 		axios.patch('http://localhost:8080/api/update',{
 			uid: changeUid,
 			title: formData.title,
-			content: cleanedContent
+			content: formData.content
 		},{withCredentials: true})
 		.then(() => {
-			window.location.href = '/board'
+			navi('/board');
+		}).catch(() => {
+			alert("제목과 내용은 필수로 기입하셔야 합니다.\n다시 확인해 주세요.")
 		})
 	}
 
@@ -85,23 +99,23 @@ const Modify = () => {
 				</div>
 				<div className="user-category">
 					<Link to='/home'>Home</Link>
-					<Link to='/fix'>Upload</Link>
+					<Link to='/upload'>Upload</Link>
 					<Link to='/board'>Community</Link>
 				</div>
 				<img src={user} alt="profile" onClick={handleClick}></img>
 			</header>
-			<main className="modify-main">
+			<main className="modify-main" onClick={handleSetFalse}>
 				{profileOpen && <div className="profile-box">
 					<img src={user}/>
 					<p>{loginData.nickname}</p>
 					<p>Member Since : {loginData.signupDate}</p>
 					<div className="my-page">My Page</div>
-					<Link to='/signin' className="logout">
+					<div className="logout" onClick={handleLogout}>
 						<img src={out}></img>
 						<p>Log Out</p>
-					</Link>
+					</div>
 				</div>}
-				<div className="modify-container">
+				<div className="modify-container" onClick={handleSetFalse}>
 					<p>글 수정</p>
 					<div>
 						<input value={formData.title} onChange={handleInputChange} name="title"></input>

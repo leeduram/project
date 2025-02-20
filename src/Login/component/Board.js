@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import '../css/reset.css';
 import '../css/Board.css';
 import b from '../img/b.png';
@@ -13,6 +13,7 @@ const Board = () => {
 		nickname:'',
 		signupDate:''
 	})
+	const navigate = useNavigate();
 	const [posts,setPosts] = useState([]);
 	const [totalPosts,setTotalPosts] = useState(0);
 	const [currentPage,setCurrentPage] = useState(1);
@@ -48,6 +49,20 @@ const Board = () => {
 		localStorage.setItem('currentPage', currentPage);
 	}, [currentPage]);
 
+	const handleClick=() => {
+		setProfileOpen(!profileOpen)
+	}
+	const handleLogout = () => {
+		axios.post('http://localhost:8080/api/logout', null, { withCredentials: true })
+		.then(() => {
+			navigate('/signin');
+		})
+	}
+	const handleSetFalse = (e) => {
+		if (e.target === e.currentTarget) {
+			setProfileOpen(false);
+		}
+	}
 	const postList = (page, limit) => {
 		axios.post('http://localhost:8080/api/page',{
 			page,limit
@@ -82,9 +97,6 @@ const Board = () => {
 
 		setPageBtn(btns);
 	}
-	const handleClick=() => {
-		setProfileOpen(!profileOpen)
-	}
 
 	return(
 		<>
@@ -95,21 +107,21 @@ const Board = () => {
 				</div>
 				<div className="user-category">
 					<Link to='/home'>Home</Link>
-					<Link to='/fix'>Upload</Link>
+					<Link to='/upload'>Upload</Link>
 					<Link to='/board'>Community</Link>
 				</div>
 				<img src={user} alt="profile" onClick={handleClick}></img>
 			</header>
-			<main className="board-main">
+			<main className="board-main" onClick={handleSetFalse}>
 				{profileOpen && <div className="profile-box">
 					<img src={user}/>
 					<p>{loginData.nickname}</p>
 					<p>Member Since : {loginData.signupDate}</p>
 					<div className="my-page">My Page</div>
-					<Link to='/signin' className="logout">
+					<div className="logout" onClick={handleLogout}>
 						<img src={out}></img>
 						<p>Log Out</p>
-					</Link>
+					</div>
 				</div>}
                 <div className="board-container">
                     <h1>자유 게시판</h1>

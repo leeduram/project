@@ -70,6 +70,12 @@ const Price = () => {
 			navigate('/signin');
 		})
 	}
+	const handleSetFalse = (e) => {
+		if (e.target === e.currentTarget) {
+			setProfileOpen(false);
+			setPayOpen(false);
+		}
+	}
 	const handleClickExpand = (image) => {
 		setExpand(image)
 	}
@@ -100,7 +106,6 @@ const Price = () => {
 				buyer_postcome:"123-456"
 			}, function (rsp) {
 				if (rsp.success) {
-					alert('결제 성공')
 					axios.post('http://localhost:8080/api/key',{
 						method: payMethod,
 						user: {
@@ -112,9 +117,11 @@ const Price = () => {
 					}, { withCredentials: true })
 					.then(() => {
 						alert('결제가 완료되었습니다.')
+						setPayOpen(false);
 					});
 				} else {
-					alert(`결제 실패: ${rsp.error_msg}`)
+					alert(`${rsp.error_msg}`)
+					setPayOpen(false);
 				}
 			})
 		}
@@ -123,23 +130,6 @@ const Price = () => {
 		setPayMethod('kakao')
 		handlePay();
 	}
-	const handelDonate = () => {
-		axios.post('http://localhost:8080/api/donate',null, { withCredentials: true })
-		.then((resp) => {
-			setKeyData(resp.data);
-			console.log(keyData)
-		}).catch((error) => {
-			alert('후원 내역을 가져오는 데 실패했습니다.');
-			console.error(error);
-		});
-	}
-	const handleDownload = () => {
-		handelDonate();
-		if (keyData !== null) {
-			const downloadLink = 'https://github.com/leeduram/project/releases/download/download/vovmain.png';
-			window.location.href = downloadLink;
-		}
-	};
 	const handleChangeAmount = (e) => {
 		setAmount(e.target.value);
 	}
@@ -150,12 +140,24 @@ const Price = () => {
 			setAmount(value);
 		}
 	}
-	const handleSetFalse = (e) => {
-		if (e.target === e.currentTarget) {
-			setProfileOpen(false);
-			setPayOpen(false);
-		}
+	const handelDonate = () => {
+		axios.post('http://localhost:8080/api/donate',null, { withCredentials: true })
+		.then((resp) => {
+			setKeyData(resp.data);
+		}).catch((error) => {
+			alert('후원 내역을 가져오는 데 실패했습니다.');
+			console.error(error);
+		});
 	}
+	const handleDownload = () => {
+		handelDonate();
+		if (keyData && keyData.method) {
+			const downloadLink = 'https://github.com/leeduram/project/releases/download/download/vovmain.png';
+			window.location.href = downloadLink;
+		} else {
+			alert('후원 내역이 없습니다.\n이 게임은 후원을 하신 이후에 다운로드가 가능합니다.')
+		}
+	};
 
 	return(
 		<>
@@ -166,7 +168,7 @@ const Price = () => {
 				</div>
 				<div className="user-category">
 					<Link to='/home'>Home</Link>
-					<Link to='/fix'>Upload</Link>
+					<Link to='/upload'>Upload</Link>
 					<Link to='/board'>Community</Link>
 				</div>
 				<img src={user} alt="profile" onClick={handleClick}></img>
@@ -182,7 +184,7 @@ const Price = () => {
 						<p>Log Out</p>
 					</div>
 				</div>}
-				<div className="price-container" onClick={handleSetFalse}>
+				<div className="price-container">
 					<img src={ditdmain} alt="mainscreen"></img>
 					<div className="price-photo">
 						<div className="price-expand">
@@ -297,7 +299,6 @@ const Price = () => {
                             </div>
 						</div>
 					</div>}
-					<button onClick={handelDonate}/>
 				</div>
 			</main>
 			<footer>Copyright © 2025 bZip</footer>

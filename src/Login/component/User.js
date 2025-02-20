@@ -15,21 +15,26 @@ const User = () => {
 	})
 	const navigate = useNavigate();
 
-	useEffect(() =>{
+	useEffect(() => {
 		axios.get('http://localhost:8080/api/info', { withCredentials: true })
 		.then((resp) => {
 			setLoginData(resp.data)
 		})
 	},[])
 
-	const handleClick=() => {
+	const handleClick = () => {
 		setProfileOpen(!profileOpen)
 	}
 	const handleLogout = () => {
 		axios.post('http://localhost:8080/api/logout', null, { withCredentials: true })
-		.then(()=> {
+		.then(() => {
 			navigate('/signin');
 		})
+	}
+	const handleSetFalse = (e) => {
+		if (e.target === e.currentTarget) {
+			setProfileOpen(false);
+		}
 	}
 
 	return(
@@ -41,12 +46,12 @@ const User = () => {
 				</div>
 				<div className="user-category">
 					<Link to='/home'>Home</Link>
-					<Link to='/fix'>Upload</Link>
+					<Link to='/upload'>Upload</Link>
 					<Link to='/board'>Community</Link>
 				</div>
 				<img src={user} alt="profile" onClick={handleClick}></img>
 			</header>
-			<main>
+			<main onClick={handleSetFalse}>
 				{profileOpen && <div className="profile-box">
 					<img src={user}/>
 					<p>{loginData.nickname}</p>
