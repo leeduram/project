@@ -55,7 +55,7 @@ const Post = () => {
 		}
 	}
 	const handleClickModify = () => {
-		if (loginData.nickname !== postData.nickname) {
+		if (loginData.nickname !== postData.user.nickname) {
 			alert('본인 글만 수정할 수 있습니다.')
 			return;
 		}

@@ -142,17 +142,17 @@ const Price = () => {
 	}
 	const handelDonate = async () => {
 		try {
-		  const response = await axios.post('http://localhost:8080/api/donate', null, { withCredentials: true });
-		  setKeyData(response.data);
-		  return response.data;
+		const response = await axios.post('http://localhost:8080/api/donate', null, { withCredentials: true });
+		setKeyData(response.data);
+		return response.data;
 		} catch (error) {
-		  throw new Error('후원 내역을 가져오는 데 실패했습니다.');
+		throw new Error('후원 내역을 가져오는 데 실패했습니다.');
 		}
-	  };
+	};
 	const handleDownload = async () => {
 		try {
 			const response = await handelDonate();
-			if (response && response.method) {
+			if (response && response.game.uid === gameData.uid) {
 				const downloadLink = 'https://github.com/leeduram/project/releases/download/download/vovmain.png';
 				window.location.href = downloadLink;
 			} else {
